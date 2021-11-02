@@ -1,4 +1,5 @@
 import React from 'react'
+import NavBar from './NavBar'
 
 interface Props {
   
@@ -7,7 +8,7 @@ interface Props {
 const Home = (props: Props) => {
   return (
     <div>
-      HOME PAGE
+      <NavBar />
     </div>
   )
 }
