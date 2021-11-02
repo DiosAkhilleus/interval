@@ -8,12 +8,9 @@ interface Props {}
 
 const AuthenticationButton = (props: Props) => {
   const { isAuthenticated } = useAuth0();
-  const { isLoading } = useAuth0();
 
   return isAuthenticated ? (
     <LogoutButton />
-  ) : isLoading ? (
-    <button className="btn btn-secondary btn-block">Loading</button>
   ) : (
     <div>
       <LoginButton /> <SignupButton />
