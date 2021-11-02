@@ -9,6 +9,7 @@ const Home = (props: Props) => {
   return (
     <div>
       <NavBar />
+      <div className="dashboard-container">Main Content</div>
     </div>
   )
 }
