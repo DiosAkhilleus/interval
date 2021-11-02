@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import AuthNav from './AuthNav';
+import SignupButton from './SignupButton';
 
 interface Props {}
 
@@ -29,6 +30,9 @@ const NavBar = (props: Props) => {
           <Nav className="justify-content-end">
               <Nav.Item>
                 <AuthNav />
+              </Nav.Item>
+              <Nav.Item style={{marginLeft: 10}}>
+                <SignupButton />
               </Nav.Item>
             </Nav>
         </Navbar.Collapse>
