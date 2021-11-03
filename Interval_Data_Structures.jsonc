@@ -1,0 +1,43 @@
+{   
+    "users": [
+        {
+            "_id": "987dfasd9a878d9sa0d8f77792", 
+            "profile_image": "url link to profile picture",
+            "name": {
+                "first_name": "Jim",
+                "last_name": "Brown"
+            }, 
+            "public_handle": "@jimbrown",
+            "email": "jimbrown@gmail.com",
+            "followers": ["_id1", "_id2", "_id3"], 
+            "following": ["_id1", "_id5", "_id6"],
+            "posts": ["post_id1", "post_id2", "post_id3"]
+        }
+    ], 
+    "posts": [
+        {
+            "posted_at": "TIME_DATE",
+            "posted_by": "789098723vffasdf7897sdfasd78",
+            "post_id": "135673839",
+            "repost_count": 0,
+            "reposted": false,
+            "text": "I finally watched that popular new movie today... yay",
+            "in_reply_to_public_handle": "@jimbrown",
+            "in_reply_to_user_id": "987dfasd9a878d9sa0d8f77792", 
+            "likes": 55,
+            "dislikes": 9001,
+            "entities": {
+                "user_mentions": [
+                    
+                ],
+                "tags": [
+
+                ], 
+                "urls": [
+                    
+                ]
+            }
+        }
+    ]
+}
+
