@@ -1,15 +1,31 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {Route, Switch } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import NavBar from './Components/Nav/NavBar';
+import Footer from './Components/Nav/Footer';
+import Profile from './Components/Profile';
+import Loading from './Components/Loading';
 import Home from './Components/Home'
 import './App.css';
 
 function App() {
+  const { isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <Loading />
+  }
+
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path='/' component={Home} />
-      </Switch>
-    </BrowserRouter>
+    <div id="app" className="d-flex flex-column h-100">
+      <NavBar />
+      <div className="container flex-grow-1">
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/profile" component={Profile} />
+        </Switch>
+      </div>
+      <Footer />
+    </div>
   );
 }
 
