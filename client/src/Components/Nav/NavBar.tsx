@@ -1,6 +1,5 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import AuthNav from './AuthNav';
 
 interface Props {}
@@ -15,6 +14,7 @@ const NavBar = (props: Props) => {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/profile">Profile</Nav.Link>
+            <Nav.Link href="/post">Create Post</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">

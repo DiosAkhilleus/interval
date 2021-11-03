@@ -6,6 +6,7 @@ import Footer from './Components/Nav/Footer';
 import Profile from './Components/Profile';
 import Loading from './Components/Loading';
 import Home from './Components/Home'
+import CreatePost from './Components/CreatePost';
 import './App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/profile" component={Profile} />
+          <Route path="/post" component={CreatePost} />
         </Switch>
       </div>
       <Footer />
