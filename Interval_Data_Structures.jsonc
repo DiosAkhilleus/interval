@@ -11,7 +11,8 @@
             "email": "jimbrown@gmail.com",
             "followers": ["_id1", "_id2", "_id3"], 
             "following": ["_id1", "_id5", "_id6"],
-            "posts": ["post_id1", "post_id2", "post_id3"]
+            "posts": ["post_id1", "post_id2", "post_id3"], 
+            "time_of_last_post": "DATE_TIME"
         }
     ], 
     "posts": [
