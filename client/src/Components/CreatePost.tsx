@@ -13,10 +13,21 @@ const CreatePost = (props: Props) => {
     return <div>Please Log In</div>
   }
 
+  const submitPost = () => {
+
+  }
+
 
   return (
-    <div>
-      <input  style={{marginTop: 10}} type="text" placeholder="What would you like to say?" />
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <input  style={{margin: 10}} type="text" placeholder="What would you like to say?" />
+      <button
+      style={{marginLeft: 10}}
+      className="btn btn-primary btn-block"
+      onClick={() => submitPost()}
+    >
+      Submit Post
+    </button>
     </div>
   )
 }
