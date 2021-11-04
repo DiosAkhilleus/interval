@@ -33,13 +33,14 @@ body {
 }
 
 .post-creator-details {
-  background-color: rgb(223, 208, 182);
+  background-color: rgb(199, 199, 199);
   width: 100%;
   height: 40%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 2px solid dimgray
 }
 
 .post-creator-name-grouping {
@@ -48,6 +49,7 @@ body {
   align-items: center;
   height: 100%;
   width: 35%;
+  
 }
 
 .post-interval-number {
@@ -63,7 +65,7 @@ body {
 }
 
 .post-content-details {
-  background-color: lavender;
+  background-color: ghostwhite;
   width: 100%;
   height: 40%;
   padding: 10px 20px 10px 20px;
@@ -71,11 +73,12 @@ body {
 }
 
 .post-content-tags {
-  background-color: lemonchiffon;
+  background-color: ghostwhite;
   height: 20%;
   display: flex;
   flex-direction: row;
   align-items: center;
+  border-top: 1px solid dimgray
 }
 
 .home-page-container {
@@ -89,10 +92,13 @@ body {
   background-color: blanchedalmond;
   height: 100%;
   width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .home-page-posts {
-  background-color: rgb(215, 207, 198);
+  background-color: rgb(232, 232, 232);
   height: 100%;
   width: 65%;
   border-right: 2px solid dimgray;
@@ -103,8 +109,22 @@ body {
   overflow: scroll;
 }
 
-.home-trending-activity {
-  background-color:indianred;
+.home-friend-activity {
+  background-color:rgb(41, 41, 41);
   height: 100%;
   width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+
+}
+
+.friend-activity-card {
+  width: 100%;
+  min-height: 80px;
+  height: 80px;
+  background-color: rgb(106, 106, 106);
+  border-bottom:2px solid rgb(53, 53, 53);
+  color: lightgray;
 }
