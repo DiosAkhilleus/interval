@@ -8,6 +8,7 @@ const LogoutButton = (props: Props) => {
 
   return (
     <button
+      style={{marginTop: 5}}
       className="btn btn-danger btn-block"
       onClick={() => {
         logout({ returnTo: window.location.origin });

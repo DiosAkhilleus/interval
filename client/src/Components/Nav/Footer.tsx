@@ -4,7 +4,7 @@ interface Props {}
 
 const Footer = (props: Props) => {
   return (
-    <footer className="bg-light p-3 text-center fixed-bottom">
+    <footer className="bg-light p-3 text-center sticky-bottom">
       <div className="logo" />
       <p>
         Interval, by <a href="diosakhilleus.github.io">DiosAkhilleus</a>
