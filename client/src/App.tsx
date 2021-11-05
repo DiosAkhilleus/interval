@@ -5,7 +5,7 @@ import NavBar from './Components/Nav/NavBar';
 import Footer from './Components/Nav/Footer';
 import Profile from './Components/Profile';
 import Loading from './Components/Loading';
-import Home from './Components/Home'
+import Home from './Components/HomePage/Home'
 import CreatePost from './Components/CreatePost';
 import './App.css';
 
