@@ -4,7 +4,7 @@ import Post from './Post';
 import PleaseLogIn from '../PleaseLogIn';
 import FriendActivityCard from './FriendActivityCard';
 import { useAuth0 } from '@auth0/auth0-react';
-import { postUser } from '../../logic/userLogic';
+// import { postUser } from '../../logic/userLogic';
 interface Props {}
 
 const Home = (props: Props) => {
@@ -77,7 +77,6 @@ const Home = (props: Props) => {
     <div className="home-page-container">
       <div className="home-page-options">
         <div>
-          <button onClick={() => postUser()}>Post User</button>
         </div>
       </div>
       <div className="home-page-posts">
