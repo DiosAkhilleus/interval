@@ -4,13 +4,25 @@ import './index.css';
 import App from './App';
 import Auth0ProviderWithHistory from './auth/auth0-provider-with-history';
 import { BrowserRouter } from 'react-router-dom';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+} from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql',
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
-    <BrowserRouter>
-      <Auth0ProviderWithHistory>
+  <BrowserRouter>
+    <Auth0ProviderWithHistory>
+      <ApolloProvider client={client}>
         <App />
-      </Auth0ProviderWithHistory>
-    </BrowserRouter>,
+      </ApolloProvider>
+    </Auth0ProviderWithHistory>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

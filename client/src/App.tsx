@@ -8,6 +8,7 @@ import Loading from './Components/Loading';
 import Home from './Components/HomePage/Home'
 import CreatePost from './Components/CreatePost';
 import './App.css';
+import GetUsers from './Components/GetUsers';
 
 function App() {
   const { isLoading } = useAuth0();
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/profile" component={Profile} />
           <Route path="/post" component={CreatePost} />
+          <Route path="/getusers" component={GetUsers} />
         </Switch>
       </div>
       <Footer />
