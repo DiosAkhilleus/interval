@@ -16,6 +16,7 @@ const GetUsers = (props: Props) => {
     profile_image: string;
   }
 
+  
   return (
     <div>
       {data.users.map((user: User, index: Number) => (
