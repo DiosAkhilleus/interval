@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     required: false,
   },
+  email_verified: {
+    type: Boolean, 
+    required: true
+  }
 });
 
 export const User = mongoose.model('Users', UserSchema);

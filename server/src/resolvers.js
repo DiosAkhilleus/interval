@@ -5,6 +5,7 @@ export const resolvers = {
     hello: () => 'Hello World',
     cheese: () => 'Give to me Cheese',
     users: async () => await User.find(),
+    currentUser: async (_, { email }) =>  await User.find({email: email})
   },
   Mutation: {
     createUser: async (_, { profile_image, name, public_handle, email, followers, following, posts }) => {

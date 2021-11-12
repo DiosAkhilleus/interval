@@ -5,6 +5,7 @@ export const typeDefs = gql`
     hello: String!
     cheese: String!
     users: [User!]!
+    currentUser(email: String!): [User!]!
   }
 
   type User {
