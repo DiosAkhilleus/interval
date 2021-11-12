@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const USERS = gql `
+export const GET_ALL_USERS = gql`
   query GetUsers {
     users {
       name
@@ -8,4 +8,15 @@ export const USERS = gql `
       profile_image
     }
   }
-`
+`;
+
+export const GET_CURRENT_USER = gql`
+  query CurrentUser ($email: String!) {
+    currentUser(email: $email) {
+      name
+      email
+      profile_image
+      public_handle
+    }
+  }
+`;

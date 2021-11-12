@@ -1,11 +1,11 @@
 import React from 'react';
-import { USERS } from '../graphql/queries';
+import { GET_ALL_USERS } from '../graphql/queries';
 import { useQuery } from '@apollo/client';
 
 interface Props {}
 
 const GetUsers = (props: Props) => {
-  const { loading, error, data } = useQuery(USERS);
+  const { loading, error, data } = useQuery(GET_ALL_USERS);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
