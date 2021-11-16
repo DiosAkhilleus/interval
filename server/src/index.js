@@ -3,7 +3,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { resolvers } from './resolvers';
 import { typeDefs } from './typeDefs';
-import { User } from './models/User';
 require('dotenv').config();
 
 const DB = process.env.DB;

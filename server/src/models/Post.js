@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const EntitySchema = new mongoose.Schema({
   user_mentions: {
@@ -17,14 +17,10 @@ const EntitySchema = new mongoose.Schema({
 
 const PostSchema = new mongoose.Schema({
   posted_at: {
-    type: Date,
-    required: true,
-  },
-  posted_by: {
     type: String,
     required: true,
   },
-  post_id: {
+  posted_by: {
     type: String,
     required: true,
   },
@@ -42,11 +38,11 @@ const PostSchema = new mongoose.Schema({
   },
   in_reply_to_public_handle: {
     type: String || null,
-    required: true,
+    required: false,
   },
   in_reply_to_user_id: {
     type: String || null,
-    required: true,
+    required: false,
   },
   likes: {
     type: Number,
@@ -63,7 +59,4 @@ const PostSchema = new mongoose.Schema({
 });
 
 
-const PostModel = new mongoose.model('Posts', PostSchema);
-
-
-module.exports = PostModel;
+export const Post = mongoose.model('Posts', PostSchema);
