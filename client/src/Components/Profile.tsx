@@ -7,13 +7,9 @@ interface Props {}
 
 const Profile = (props: Props) => {
   const { user } = useAuth0();
-  const { name, picture, email } = user!;
+  const { email } = user!;
 
   const { loading, error, data } = useQuery(GET_CURRENT_USER, {variables: {email: email}});
-
-  const currentUser = data.currentUser[0];
-
-
 
 
   return (
@@ -21,13 +17,14 @@ const Profile = (props: Props) => {
       <div className="row align-items-center profile-header">
         <div className="col-md-2 mb-3">
           <img
-            src={picture}
+            src={data ? data.currentUser[0].profile_image : ''}
             alt="Profile"
             className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
+            style={{width: 180}}
           />
         </div>
         <div className="col-md text-center text-md-left">
-          <h2>{currentUser.public_handle}</h2>
+          {data ? <h2>@{data.currentUser[0].public_handle}</h2> : ''}
           <p className="lead text-muted">{email}</p>
         </div>
       </div>

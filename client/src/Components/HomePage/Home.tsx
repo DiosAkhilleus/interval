@@ -3,12 +3,19 @@ import Loading from '../Loading';
 import Post from './Post';
 import PleaseLogIn from '../PleaseLogIn';
 import FriendActivityCard from './FriendActivityCard';
+import Discover from './Discover';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useQuery } from '@apollo/client';
+import { GET_CURRENT_USER } from '../../graphql/queries';
 // import { postUser } from '../../logic/userLogic';
 interface Props {}
 
 const Home = (props: Props) => {
-  const { isLoading, isAuthenticated } = useAuth0();
+  const { isLoading, isAuthenticated, user } = useAuth0();
+  const { email } = user!;
+
+  const { loading, error, data } = useQuery(GET_CURRENT_USER, {variables: {email: email}});
+
 
   if (isLoading) {
     return <Loading />;
@@ -75,9 +82,8 @@ const Home = (props: Props) => {
 
   return (
     <div className="home-page-container">
-      <div className="home-page-options">
-        <div>
-        </div>
+      <div className="home-page-discover">
+        <Discover />
       </div>
       <div className="home-page-posts">
         {posts.map((el, id) => (

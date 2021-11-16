@@ -1,35 +1,35 @@
-import React from 'react'
+import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
-interface Props {
-  
-}
+interface Props {}
 
 const CreatePost = (props: Props) => {
-
   const { isAuthenticated } = useAuth0();
 
   if (!isAuthenticated) {
-    return <div>Please Log In</div>
+    return <div>Please Log In</div>;
   }
 
-  const submitPost = () => {
-
-  }
-
+  const submitPost = () => {};
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-      <input  style={{margin: 10}} type="text" placeholder="What would you like to say?" />
-      <button
-      style={{marginLeft: 10}}
-      className="btn btn-primary btn-block"
-      onClick={() => submitPost()}
+    <div
+      className='create-post-container'
     >
-      Submit Post
-    </button>
+      <input
+        style={{ margin: 10 }}
+        type="text"
+        placeholder="What would you like to say?"
+      />
+      <button
+        style={{ marginLeft: 10 }}
+        className="btn btn-primary btn-block"
+        onClick={() => submitPost()}
+      >
+        Submit Post
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default CreatePost
+export default CreatePost;

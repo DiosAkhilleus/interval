@@ -16,6 +16,7 @@ const PostUser = (props: Props) => {
     following: [],
     posts: []
   }
+  //eslint-disable-next-line
   const [postUser, { data, loading, error }] = useMutation(POST_USER)
 
   if (loading) return <div>'Submitting'</div>
