@@ -20,21 +20,29 @@ body {
   background-color: white;
 }
 
-.post-container {
-  background-color: rgb(228, 228, 228);
+.post-outer-container {
   width: 90%;
   min-height: 200px;
   max-height: 200px;
   margin: 20px;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
   filter: drop-shadow(0 0 0.75rem rgb(147, 147, 147));
   border: 2px solid dimgray;
   border-radius: 3px;
+}
+
+.post-inner-container {
+  border-right: 2px solid dimgray;
   display: flex;
   flex-direction: column;
+  width: 80%;
+  max-width: 80%;
 }
 
 .post-creator-details {
-  background-color: rgb(199, 199, 199);
+  background-color: white;
   width: 100%;
   height: 40%;
   display: flex;
@@ -49,7 +57,7 @@ body {
   flex-direction: row;
   align-items: center;
   height: 80%;
-  width: 35%;
+  width: 50%;
   margin-left: 10px;
 }
 
@@ -62,7 +70,6 @@ body {
 .post-creator-handle {
   font-size: 20px;
   margin-right: 20px;
-  width: 15%;
 }
 
 .post-content-details {
@@ -80,6 +87,23 @@ body {
   flex-direction: row;
   align-items: center;
   border-top: 1px solid dimgray
+}
+
+.post-interaction-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  justify-content: space-evenly;
+}
+
+.vote-button:hover {
+  cursor:pointer;
+}
+
+.vote-number {
+  font-weight: 800;
 }
 
 .home-page-container {
@@ -121,7 +145,7 @@ body {
 }
 
 .home-friend-activity {
-  background-color:rgb(203, 203, 203);
+  background-color:white;
   height: 100%;
   width: 20%;
   display: flex;
