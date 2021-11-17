@@ -7,6 +7,8 @@ export const resolvers = {
     cheese: () => 'Give to me Cheese',
     users: async () => await User.find(),
     currentUser: async (_, { email }) => await User.find({ email: email }),
+    getUserById: async (_, { _id }) => await User.find({ _id: _id }),
+    posts: async () => await Post.find()
   },
   Mutation: {
     createUser: async (
