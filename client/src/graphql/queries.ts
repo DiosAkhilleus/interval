@@ -20,3 +20,28 @@ export const GET_CURRENT_USER = gql`
     }
   }
 `;
+
+export const GET_USER_BY_ID = gql`
+  query GetUserById ($id: String!) {
+    getUserById(_id: $id) {
+      name
+      public_handle
+      profile_image
+    }
+  }
+`
+
+export const GET_POSTS = gql`
+  query GetPosts {
+    posts {
+      text
+      posted_by
+      repost_count
+      likes
+      dislikes
+      entities {
+        tags
+      }
+    }
+  }
+`

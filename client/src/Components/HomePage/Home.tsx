@@ -6,7 +6,7 @@ import FriendActivityCard from './FriendActivityCard';
 import Discover from './Discover';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useQuery } from '@apollo/client';
-import { GET_CURRENT_USER } from '../../graphql/queries';
+import { GET_POSTS } from '../../graphql/queries';
 // import { postUser } from '../../logic/userLogic';
 interface Props {}
 
@@ -14,8 +14,9 @@ const Home = (props: Props) => {
   const { isLoading, isAuthenticated, user } = useAuth0();
   const { email } = user!;
 
-  const { loading, error, data } = useQuery(GET_CURRENT_USER, {variables: {email: email}});
+  const { loading, error, data } = useQuery(GET_POSTS);
 
+  console.log(data);
 
   if (isLoading) {
     return <Loading />;
@@ -86,16 +87,11 @@ const Home = (props: Props) => {
         <Discover />
       </div>
       <div className="home-page-posts">
-        {posts.map((el, id) => (
+        {data ? data.posts.map((el: any, id: number) => (
           <Post
-            handle={el.handle}
-            name={el.name}
-            interval={el.interval}
-            tags={el.tags}
-            profileImage={el.profile_image}
-            postText={el.text}
+            postInfo={el}
           />
-        ))}
+        )) : ''}
       </div>
       <div className="home-friend-activity">
         <h2 style={{fontFamily: 'Roboto'}}>Friend Activity</h2>
