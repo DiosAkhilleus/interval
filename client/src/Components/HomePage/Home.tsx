@@ -11,8 +11,7 @@ import { GET_POSTS } from '../../graphql/queries';
 interface Props {}
 
 const Home = (props: Props) => {
-  const { isLoading, isAuthenticated, user } = useAuth0();
-  const { email } = user!;
+  const { isLoading, isAuthenticated } = useAuth0();
 
   const { loading, error, data } = useQuery(GET_POSTS);
 
@@ -22,44 +21,6 @@ const Home = (props: Props) => {
   if (!isAuthenticated) {
     return <PleaseLogIn />;
   }
-  const posts = [
-    {
-      name: 'Jim Brown',
-      handle: '@jimbrown',
-      interval: 234,
-      profile_image:
-        'https://s.gravatar.com/avatar/c5aee30741780469d8b802522c6b550d?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fjb.png',
-      tags: ['#asdf', '#cheese', '#apples', '#coolstuff'],
-      text: "I like running with the football very fast and jumping everywhere. I was a Cleveland Browns' RB",
-    },
-    {
-      name: 'John Doe',
-      handle: '@johndoe',
-      interval: 15,
-      profile_image:
-        'https://s.gravatar.com/avatar/c5aee30741780469d8b802522c6b550d?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fjd.png',
-      tags: ['#iam', '#john', '#doe'],
-      text: 'I am john doe what a dumb name that is very non-unique if you can believe it, so stupid placeholder name',
-    },
-    {
-      name: 'Baker Mayfield',
-      handle: '@bmayfield6',
-      interval: 543,
-      profile_image:
-        'https://s.gravatar.com/avatar/c5aee30741780469d8b802522c6b550d?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fbm.png',
-      tags: ['#futbol', '#football', '#sooners'],
-      text: "OBJ is such a diva I wish he were off the team it's such a distraction to still have him on this Browns team",
-    },
-    {
-      name: 'Nick Chubb',
-      handle: '@nchubb27',
-      interval: 24,
-      profile_image:
-        'https://s.gravatar.com/avatar/c5aee30741780469d8b802522c6b550d?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fnc.png',
-      tags: ['#batman', '#super', '#strong'],
-      text: 'I like batman',
-    },
-  ];
 
   const placeholderFriendActivity = [
     {

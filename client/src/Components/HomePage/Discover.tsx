@@ -1,20 +1,16 @@
-import React from 'react'
+import React from 'react';
 
-interface Props {
-  
-}
+interface Props {}
 
 const Discover = (props: Props) => {
   return (
-    <div className='discover-container'>
-      <div className='discover-search'>
-        <input type="text" className='text' />
-      </div>
-      <div>
-        User Display
+    <div className="discover-container">
+      <h3 style={{marginTop: 10}}>Search for Users</h3>
+      <div className="discover-search">
+        <input type="text" />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Discover
+export default Discover;
