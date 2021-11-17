@@ -16,8 +16,6 @@ const Home = (props: Props) => {
 
   const { loading, error, data } = useQuery(GET_POSTS);
 
-  console.log(data);
-
   if (isLoading) {
     return <Loading />;
   }
@@ -90,6 +88,7 @@ const Home = (props: Props) => {
         {data ? data.posts.map((el: any, id: number) => (
           <Post
             postInfo={el}
+            key={id}
           />
         )) : ''}
       </div>

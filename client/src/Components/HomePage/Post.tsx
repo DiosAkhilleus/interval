@@ -50,7 +50,7 @@ const Post = ({ postInfo } :Props) => {
           <h3 style={{ marginBottom: 4, marginLeft: 10 }}>{ data ? data.getUserById[0].name : ''}</h3>
         </div>
         {/* <div className="post-interval-number">Interval #{interval} </div> */}
-        <div className="post-creator-handle">{data ? data.getUserById[0].public_handle : ''}</div>
+        <div className="post-creator-handle">@{data ? data.getUserById[0].public_handle : ''}</div>
       </div>
       <div className="post-content-details">{postInfo.text}</div>
       <div className="post-content-tags">
