@@ -61,6 +61,8 @@ export const typeDefs = gql`
     createUser(profile_image: String!, name: String!, public_handle: String!, email: String!, followers: [ID!]!, following: [ID!]!, posts: [ID]!): User!
 
     createPost(posted_at: String!, posted_by: ID!, repost_count: Int!, reposted: Boolean!, text: String!, in_reply_to_public_handle: String!, in_reply_to_user_id: String!, likes: Int!, dislikes: Int!, user_mentions: [String!]!, tags: [String!]!, urls: [String!]! ): Post!
+
+    changeName(name: String!, _id: String!): User!
   }
 `;
  

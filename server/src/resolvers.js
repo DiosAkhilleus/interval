@@ -64,5 +64,13 @@ export const resolvers = {
       await newPost.save();
       return newPost;
     },
+    changeName: async (_, { _id, name }) => {
+      const filter = { _id: _id };
+      const update = { name: name }
+      let user = await User.findOneAndUpdate(filter, update, {
+        new: true
+      });
+      return user;
+    }
   },
 };
