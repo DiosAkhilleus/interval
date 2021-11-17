@@ -17,6 +17,7 @@ export const GET_CURRENT_USER = gql`
       email
       profile_image
       public_handle
+      id
     }
   }
 `;

@@ -1,5 +1,16 @@
 import { gql } from '@apollo/client';
 
+export const CHANGE_DISPLAY_NAME = gql`
+  mutation ChangeDisplayName(
+    $name: String!
+    $id: String!
+    ) {
+      changeName(name: $name, _id: $id) {
+        name
+    }
+  }
+`;
+
 export const POST_USER = gql`
   mutation PostUser(
     $profile_image: String!
