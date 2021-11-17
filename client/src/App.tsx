@@ -10,6 +10,7 @@ import CreatePost from './Components/CreatePost';
 import './App.css';
 import GetUsers from './Components/GetUsers';
 import PostUser from './Components/PostUser';
+import Settings from './Components/Settings';
 
 function App() {
   const { isLoading } = useAuth0();
@@ -28,6 +29,7 @@ function App() {
           <Route path="/post" component={CreatePost} />
           <Route path="/getusers" component={GetUsers} />
           <Route path="/postuser" component={PostUser} />
+          <Route path="/settings" component={Settings} />
         </Switch>
       </div>
       <Footer />
