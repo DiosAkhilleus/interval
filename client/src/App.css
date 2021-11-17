@@ -23,7 +23,8 @@ body {
 .post-container {
   background-color: rgb(228, 228, 228);
   width: 90%;
-  min-height: 175px;
+  min-height: 200px;
+  max-height: 200px;
   margin: 20px;
   filter: drop-shadow(0 0 0.75rem rgb(147, 147, 147));
   border: 2px solid dimgray;
@@ -47,7 +48,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 60%;
+  height: 80%;
   width: 35%;
   margin-left: 10px;
 }
