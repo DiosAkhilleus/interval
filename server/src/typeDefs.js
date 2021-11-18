@@ -67,8 +67,9 @@ export const typeDefs = gql`
 
   type VoteFields {
     user_id: String 
+    post_id: String
     type: String
-    new_post_list: [String]
+    method: String
   }
 
   type Mutation {
@@ -80,7 +81,7 @@ export const typeDefs = gql`
 
     modifyPostWithVote(_id: String!, type: String, method: String): UserVote!
 
-    modifyUserVoteFields(user_id: String!, type: String!, new_post_list: [String]!): VoteFields!
+    modifyUserVoteFields(user_id: String!, post_id: String!, type: String!, method: String!): VoteFields!
   }
 `;
  

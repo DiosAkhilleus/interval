@@ -89,14 +89,37 @@ export const resolvers = {
       );
       return post;
     },
-    modifyUserVoteFields: async (_, { user_id, type, new_post_list }) => {
+    modifyUserVoteFields: async (_, { user_id, post_id, type, method }) => {
+      console.log(user_id, post_id, type, method);
+
       const filter = { _id: user_id };
-      const user = await User.findOneAndUpdate(
-        filter,
-        { [type]: new_post_list },
-        { new: true }
-      );
-      return user;
+      const user = await User.find(filter)
+      let liked_posts = user[0].liked_posts;
+      let disliked_posts = user[0].disliked_posts;
+      console.log(liked_posts, disliked_posts);
+      let replacementArr;
+      
+      if (type === 'liked_posts') {
+        if (method === 'add') {
+          replacementArr = [...liked_posts, post_id];
+        }
+        if (method === 'remove') {
+          replacementArr = liked_posts.filter((post) => post !== post_id)
+        }
+      }
+      if (type === 'disliked_posts') {
+        if (method === 'add') {
+          replacementArr = [...disliked_posts, post_id]
+        }
+        if (method === 'subtract') {
+          replacementArr = disliked_posts.filter((post) => post !== post_id)
+        }
+      }
+      const newUser = User.findOneAndUpdate(filter, 
+        {[type]: replacementArr},
+        {new: true}
+        );
+      return newUser;
     },
   },
 };
