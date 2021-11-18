@@ -11,6 +11,7 @@ import './App.css';
 import GetUsers from './Components/GetUsers';
 import PostUser from './Components/PostUser';
 import Settings from './Components/Settings';
+import Public from './Components/Public';
 
 function App() {
   const { isLoading } = useAuth0();
@@ -24,7 +25,8 @@ function App() {
       <NavBar />
       <div>
         <Switch>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={Public} />
+          <Route path="/home" exact component={Home} />
           <Route path="/profile" component={Profile} />
           <Route path="/post" component={CreatePost} />
           <Route path="/getusers" component={GetUsers} />
