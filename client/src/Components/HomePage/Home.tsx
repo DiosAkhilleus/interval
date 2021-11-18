@@ -6,14 +6,21 @@ import FriendActivityCard from './FriendActivityCard';
 import Discover from './Discover';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useQuery } from '@apollo/client';
-import { GET_POSTS } from '../../graphql/queries';
+import { GET_POSTS, GET_CURRENT_USER_VOTED_POSTS } from '../../graphql/queries';
 // import { postUser } from '../../logic/userLogic';
 interface Props {}
 
 const Home = (props: Props) => {
-  const { isLoading, isAuthenticated } = useAuth0();
+  const { isLoading, isAuthenticated, user } = useAuth0();
+  const { email } = user!;
 
   const { loading, error, data } = useQuery(GET_POSTS);
+
+  let userVotedPosts = useQuery(GET_CURRENT_USER_VOTED_POSTS, {
+    variables: {email: email}
+  })
+  console.log(userVotedPosts.data);
+
 
   if (isLoading) {
     return <Loading />;
@@ -46,9 +53,12 @@ const Home = (props: Props) => {
         <Discover />
       </div>
       <div className="home-page-posts">
-        {data ? data.posts.map((el: any, id: number) => (
+        {data && userVotedPosts.data ? data.posts.map((el: any, id: number) => (
           <Post
             postInfo={el}
+            currentUserLikedPosts={userVotedPosts.data.currentUser[0].liked_posts}
+            currentUserDislikedPosts={userVotedPosts.data.currentUser[0].disliked_posts}
+            currentUserId={userVotedPosts.data.currentUser[0].id}
             key={id}
           />
         )) : ''}

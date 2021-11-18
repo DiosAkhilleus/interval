@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USER_BY_ID } from '../../graphql/queries';
-import { HANDLE_USER_VOTE } from '../../graphql/mutations';
+import {
+  MODIFY_POST_WITH_VOTE,
+  MODIFY_USER_VOTE_FIELDS,
+} from '../../graphql/mutations';
 
 interface Entities {
   tags: Array<string>;
@@ -20,62 +23,153 @@ interface PostInterface {
 
 interface Props {
   postInfo: PostInterface;
+  currentUserLikedPosts: Array<string>;
+  currentUserDislikedPosts: Array<string>;
+  currentUserId: String;
 }
 
-const Post = ({ postInfo }: Props) => {
+const Post = ({
+  postInfo,
+  currentUserLikedPosts,
+  currentUserDislikedPosts,
+  currentUserId,
+}: Props) => {
+  // console.log(currentUserDislikedPosts, currentUserLikedPosts)
+
   const { isLoading } = useAuth0();
   const [image, setImage] = useState('');
   const [likedByUser, setLikedByUser] = useState(false);
   const [dislikedByUser, setDislikedByUser] = useState(false);
+  const [postLikes, setPostLikes] = useState(postInfo.likes);
+  const [postDislikes, setPostDislikes] = useState(postInfo.dislikes);
 
   const { loading, error, data } = useQuery(GET_USER_BY_ID, {
     variables: { id: postInfo.posted_by },
   });
 
-  const [handleUserVote, handleUseVoteData] = useMutation(HANDLE_USER_VOTE);
+  const [modifyPostWithVote, modifyPostWithVoteData] = useMutation(
+    MODIFY_POST_WITH_VOTE
+  );
+  const [modifyUserVoteFields, modifyUserVoteFieldsData] = useMutation(
+    MODIFY_USER_VOTE_FIELDS
+  );
 
   useEffect(() => {
     if (data) {
       setImage(data.getUserById[0].profile_image);
+      console.log(currentUserLikedPosts, currentUserDislikedPosts);
+      console.log(postInfo.id);
+      const filteredUserLikes = currentUserLikedPosts.filter(
+        (el: string) => el === postInfo.id
+      );
+      const filteredUserDislikes = currentUserDislikedPosts.filter(
+        (el: string) => el === postInfo.id
+      );
+      if (filteredUserLikes.length > 0) {
+        setLikedByUser(true);
+      }
+      if (filteredUserDislikes.length > 0) {
+        setDislikedByUser(true);
+      }
     }
   }, [data]);
 
   const handleVote = (vote: string) => {
+    let replacementLikeArr = [...currentUserLikedPosts]
+    let replacementDislikeArr = [...currentUserDislikedPosts];
     if (vote === 'like') {
       if (likedByUser) {
-        handleUserVote({
+        setPostLikes(postLikes - 1);
+        modifyPostWithVote({
           variables: { id: postInfo.id, type: 'likes', method: 'decrement' },
+        });
+        modifyUserVoteFields({
+          variables: {
+            user_id: currentUserId,
+            type: 'liked_posts',
+            new_post_list: replacementLikeArr.filter(
+              (post) => post !== postInfo.id
+            ),
+          },
         });
       }
       if (!likedByUser) {
-        handleUserVote({
+        setPostLikes(postLikes + 1);
+        modifyPostWithVote({
           variables: { id: postInfo.id, type: 'likes', method: 'increment' },
+        });
+        modifyUserVoteFields({
+          variables: {
+            user_id: currentUserId,
+            type: 'liked_posts',
+            new_post_list: [...replacementLikeArr, postInfo.id],
+          },
         });
       }
       setLikedByUser(!likedByUser);
       if (dislikedByUser === true) {
         setDislikedByUser(false);
-        handleUserVote({
+        setPostDislikes(postDislikes - 1);
+        modifyPostWithVote({
           variables: { id: postInfo.id, type: 'dislikes', method: 'decrement' },
+        });
+        modifyUserVoteFields({
+          variables: {
+            user_id: currentUserId,
+            type: 'disliked_posts',
+            new_post_list: replacementDislikeArr.filter(
+              (post) => post !== postInfo.id
+            ),
+          },
         });
       }
     }
+
+
     if (vote === 'dislike') {
       if (dislikedByUser) {
-        handleUserVote({
+        setPostDislikes(postDislikes - 1);
+        modifyPostWithVote({
           variables: { id: postInfo.id, type: 'dislikes', method: 'decrement' },
+        });
+        modifyUserVoteFields({
+          variables: {
+            user_id: currentUserId,
+            type: 'disliked_posts',
+            new_post_list: replacementDislikeArr.filter(
+              (post) => post !== postInfo.id
+            ),
+          },
         });
       }
       if (!dislikedByUser) {
-        handleUserVote({
+        setPostDislikes(postDislikes + 1);
+        modifyPostWithVote({
           variables: { id: postInfo.id, type: 'dislikes', method: 'increment' },
+        });
+        modifyUserVoteFields({
+          variables: {
+            user_id: currentUserId,
+            type: 'disliked_posts',
+            new_post_list: [...replacementDislikeArr, postInfo.id],
+          },
         });
       }
       setDislikedByUser(!dislikedByUser);
       if (likedByUser === true) {
+        setPostLikes(postLikes - 1);
         setLikedByUser(false);
-        handleUserVote({
+        modifyPostWithVote({
           variables: { id: postInfo.id, type: 'likes', method: 'decrement' },
+        });
+        modifyUserVoteFields({
+          variables: {
+            user_id: currentUserId,
+            type: 'liked_posts',
+            new_post_list: replacementLikeArr.filter(
+              (post) => post !== postInfo.id
+            ),
+          },
         });
       }
     }
@@ -113,9 +207,7 @@ const Post = ({ postInfo }: Props) => {
         </div>
       </div>
       <div className="post-interaction-container">
-        <div className="vote-number">
-          {likedByUser ? postInfo.likes + 1 : postInfo.likes}
-        </div>
+        <div className="vote-number">{postLikes}</div>
         <div className="vote-button" onClick={() => handleVote('like')}>
           {likedByUser ? (
             <img
@@ -144,9 +236,7 @@ const Post = ({ postInfo }: Props) => {
             />
           )}
         </div>
-        <div className="vote-number">
-          {dislikedByUser ? postInfo.dislikes + 1 : postInfo.dislikes}
-        </div>
+        <div className="vote-number">{postDislikes}</div>
       </div>
     </div>
   );
