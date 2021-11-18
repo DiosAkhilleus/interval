@@ -75,8 +75,6 @@ const Post = ({
   }, [data]);
 
   const handleVote = (vote: string) => {
-    let replacementLikeArr = [...currentUserLikedPosts]
-    let replacementDislikeArr = [...currentUserDislikedPosts];
     if (vote === 'like') {
       if (likedByUser) {
         setPostLikes(postLikes - 1);
@@ -86,10 +84,9 @@ const Post = ({
         modifyUserVoteFields({
           variables: {
             user_id: currentUserId,
+            post_id: postInfo.id,
             type: 'liked_posts',
-            new_post_list: replacementLikeArr.filter(
-              (post) => post !== postInfo.id
-            ),
+            method: 'remove',
           },
         });
       }
@@ -101,28 +98,29 @@ const Post = ({
         modifyUserVoteFields({
           variables: {
             user_id: currentUserId,
+            post_id: postInfo.id,
             type: 'liked_posts',
-            new_post_list: [...replacementLikeArr, postInfo.id],
+            method: 'add',
           },
         });
+        if (dislikedByUser === true) {
+          setDislikedByUser(false);
+          setPostDislikes(postDislikes - 1);
+          modifyPostWithVote({
+            variables: { id: postInfo.id, type: 'dislikes', method: 'decrement' },
+          });
+          modifyUserVoteFields({
+            variables: {
+              user_id: currentUserId,
+              post_id: postInfo.id,
+              type: 'disliked_posts',
+              method: 'remove',
+            },
+          });
+        }
       }
       setLikedByUser(!likedByUser);
-      if (dislikedByUser === true) {
-        setDislikedByUser(false);
-        setPostDislikes(postDislikes - 1);
-        modifyPostWithVote({
-          variables: { id: postInfo.id, type: 'dislikes', method: 'decrement' },
-        });
-        modifyUserVoteFields({
-          variables: {
-            user_id: currentUserId,
-            type: 'disliked_posts',
-            new_post_list: replacementDislikeArr.filter(
-              (post) => post !== postInfo.id
-            ),
-          },
-        });
-      }
+      
     }
 
 
@@ -135,10 +133,9 @@ const Post = ({
         modifyUserVoteFields({
           variables: {
             user_id: currentUserId,
+            post_id: postInfo.id,
             type: 'disliked_posts',
-            new_post_list: replacementDislikeArr.filter(
-              (post) => post !== postInfo.id
-            ),
+            method: 'remove',
           },
         });
       }
@@ -150,28 +147,29 @@ const Post = ({
         modifyUserVoteFields({
           variables: {
             user_id: currentUserId,
+            post_id: postInfo.id,
             type: 'disliked_posts',
-            new_post_list: [...replacementDislikeArr, postInfo.id],
+            method: 'add',
           },
         });
+        if (likedByUser === true) {
+          setPostLikes(postLikes - 1);
+          setLikedByUser(false);
+          modifyPostWithVote({
+            variables: { id: postInfo.id, type: 'likes', method: 'decrement' },
+          });
+          modifyUserVoteFields({
+            variables: {
+              user_id: currentUserId,
+              post_id: postInfo.id,
+              type: 'liked_posts',
+              method: 'remove',
+            },
+          });
+        }
       }
       setDislikedByUser(!dislikedByUser);
-      if (likedByUser === true) {
-        setPostLikes(postLikes - 1);
-        setLikedByUser(false);
-        modifyPostWithVote({
-          variables: { id: postInfo.id, type: 'likes', method: 'decrement' },
-        });
-        modifyUserVoteFields({
-          variables: {
-            user_id: currentUserId,
-            type: 'liked_posts',
-            new_post_list: replacementLikeArr.filter(
-              (post) => post !== postInfo.id
-            ),
-          },
-        });
-      }
+      
     }
   };
 
