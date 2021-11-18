@@ -72,7 +72,7 @@ export const resolvers = {
       });
       return user;
     },
-    handleUserVote: async (_, { _id, type, method }) => {
+    modifyPostWithVote: async (_, { _id, type, method }) => {
       let inc;
       let filter = { _id: _id };
       if (method === 'increment') {
@@ -85,9 +85,18 @@ export const resolvers = {
       const post = await Post.findOneAndUpdate(
         filter,
         { $inc: { [type]: inc } },
-        { new: true },
+        { new: true }
       );
       return post;
+    },
+    modifyUserVoteFields: async (_, { user_id, type, new_post_list }) => {
+      const filter = { _id: user_id };
+      const user = await User.findOneAndUpdate(
+        filter,
+        { [type]: new_post_list },
+        { new: true }
+      );
+      return user;
     },
   },
 };

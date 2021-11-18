@@ -36,6 +36,14 @@ const UserSchema = new mongoose.Schema({
   email_verified: {
     type: Boolean, 
     required: true
+  }, 
+  liked_posts: {
+    type: Array,
+    required: true
+  },
+  disliked_posts: {
+    type: Array,
+    required: true
   }
 });
 

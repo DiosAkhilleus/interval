@@ -19,6 +19,8 @@ export const typeDefs = gql`
     followers: [ID!]!
     following: [ID!]!
     posts: [ID!]!
+    liked_posts: [String!]!
+    disliked_posts: [String!]!
   }
 
   type Entities {
@@ -63,6 +65,12 @@ export const typeDefs = gql`
     method: String
   }
 
+  type VoteFields {
+    user_id: String 
+    type: String
+    new_post_list: [String]
+  }
+
   type Mutation {
     createUser(profile_image: String!, name: String!, public_handle: String!, email: String!, followers: [ID!]!, following: [ID!]!, posts: [ID]!): User!
 
@@ -70,7 +78,9 @@ export const typeDefs = gql`
 
     changeName(name: String!, _id: String!): User!
 
-    handleUserVote(_id: String!, type: String, method: String): UserVote!
+    modifyPostWithVote(_id: String!, type: String, method: String): UserVote!
+
+    modifyUserVoteFields(user_id: String!, type: String!, new_post_list: [String]!): VoteFields!
   }
 `;
  
