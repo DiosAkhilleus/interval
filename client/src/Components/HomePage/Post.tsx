@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { GET_USER_BY_ID } from '../../graphql/queries';
+import { HANDLE_USER_VOTE } from '../../graphql/mutations';
 
 interface Entities {
   tags: Array<string>;
@@ -14,6 +15,7 @@ interface PostInterface {
   entities: Entities;
   likes: number;
   dislikes: number;
+  id: string;
 }
 
 interface Props {
@@ -30,6 +32,8 @@ const Post = ({ postInfo }: Props) => {
     variables: { id: postInfo.posted_by },
   });
 
+  const [handleUserVote, handleUseVoteData] = useMutation(HANDLE_USER_VOTE);
+
   useEffect(() => {
     if (data) {
       setImage(data.getUserById[0].profile_image);
@@ -38,15 +42,41 @@ const Post = ({ postInfo }: Props) => {
 
   const handleVote = (vote: string) => {
     if (vote === 'like') {
+      if (likedByUser) {
+        handleUserVote({
+          variables: { id: postInfo.id, type: 'likes', method: 'decrement' },
+        });
+      }
+      if (!likedByUser) {
+        handleUserVote({
+          variables: { id: postInfo.id, type: 'likes', method: 'increment' },
+        });
+      }
       setLikedByUser(!likedByUser);
       if (dislikedByUser === true) {
         setDislikedByUser(false);
+        handleUserVote({
+          variables: { id: postInfo.id, type: 'dislikes', method: 'decrement' },
+        });
       }
     }
     if (vote === 'dislike') {
+      if (dislikedByUser) {
+        handleUserVote({
+          variables: { id: postInfo.id, type: 'dislikes', method: 'decrement' },
+        });
+      }
+      if (!dislikedByUser) {
+        handleUserVote({
+          variables: { id: postInfo.id, type: 'dislikes', method: 'increment' },
+        });
+      }
       setDislikedByUser(!dislikedByUser);
       if (likedByUser === true) {
         setLikedByUser(false);
+        handleUserVote({
+          variables: { id: postInfo.id, type: 'likes', method: 'decrement' },
+        });
       }
     }
   };
@@ -83,7 +113,9 @@ const Post = ({ postInfo }: Props) => {
         </div>
       </div>
       <div className="post-interaction-container">
-        <div className="vote-number">{postInfo.likes}</div>
+        <div className="vote-number">
+          {likedByUser ? postInfo.likes + 1 : postInfo.likes}
+        </div>
         <div className="vote-button" onClick={() => handleVote('like')}>
           {likedByUser ? (
             <img
@@ -112,7 +144,9 @@ const Post = ({ postInfo }: Props) => {
             />
           )}
         </div>
-        <div className="vote-number">{postInfo.dislikes}</div>
+        <div className="vote-number">
+          {dislikedByUser ? postInfo.dislikes + 1 : postInfo.dislikes}
+        </div>
       </div>
     </div>
   );
