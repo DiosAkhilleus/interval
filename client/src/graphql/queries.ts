@@ -35,6 +35,7 @@ export const GET_USER_BY_ID = gql`
 export const GET_POSTS = gql`
   query GetPosts {
     posts {
+      id
       text
       posted_by
       repost_count

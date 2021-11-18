@@ -1,5 +1,19 @@
 import { gql } from '@apollo/client';
 
+
+export const HANDLE_USER_VOTE = gql`
+  mutation HandleUserVote(
+    $id: String!
+    $type: String!
+    $method: String!
+  ) {
+    handleUserVote(_id: $id, type: $type, method: $method) {
+      type
+      method
+    }
+  }
+`
+
 export const CHANGE_DISPLAY_NAME = gql`
   mutation ChangeDisplayName(
     $name: String!
