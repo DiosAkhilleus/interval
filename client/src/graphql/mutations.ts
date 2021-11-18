@@ -1,13 +1,26 @@
 import { gql } from '@apollo/client';
 
+export const MODIFY_USER_VOTE_FIELDS = gql`
+  mutation ModifyUserVoteFields(
+    $user_id: String!
+    $type: String!
+    $new_post_list: [String!]!
+  ) {
+    modifyUserVoteFields(user_id: $user_id, type: $type, new_post_list: $new_post_list) {
+      user_id
+      type
+      new_post_list
+    }
+  }
+`
 
-export const HANDLE_USER_VOTE = gql`
-  mutation HandleUserVote(
+export const MODIFY_POST_WITH_VOTE = gql`
+  mutation ModifyPostWithVote(
     $id: String!
     $type: String!
     $method: String!
   ) {
-    handleUserVote(_id: $id, type: $type, method: $method) {
+    modifyPostWithVote(_id: $id, type: $type, method: $method) {
       type
       method
     }

@@ -22,6 +22,16 @@ export const GET_CURRENT_USER = gql`
   }
 `;
 
+export const GET_CURRENT_USER_VOTED_POSTS = gql`
+  query CurrentUser ($email: String!) {
+    currentUser(email: $email) {
+      id
+      liked_posts
+      disliked_posts
+    }
+  }
+`;
+
 export const GET_USER_BY_ID = gql`
   query GetUserById ($id: String!) {
     getUserById(_id: $id) {
