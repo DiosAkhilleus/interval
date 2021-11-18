@@ -8,7 +8,7 @@ export const resolvers = {
     users: async () => await User.find(),
     currentUser: async (_, { email }) => await User.find({ email: email }),
     getUserById: async (_, { _id }) => await User.find({ _id: _id }),
-    posts: async () => await Post.find()
+    posts: async () => await Post.find(),
   },
   Mutation: {
     createUser: async (
@@ -47,8 +47,8 @@ export const resolvers = {
       const entities = {
         user_mentions: user_mentions,
         tags: tags,
-        urls: urls
-      }
+        urls: urls,
+      };
       const newPost = new Post({
         posted_at: posted_at,
         posted_by: posted_by,
@@ -66,11 +66,28 @@ export const resolvers = {
     },
     changeName: async (_, { _id, name }) => {
       const filter = { _id: _id };
-      const update = { name: name }
+      const update = { name: name };
       let user = await User.findOneAndUpdate(filter, update, {
-        new: true
+        new: true,
       });
       return user;
-    }
+    },
+    handleUserVote: async (_, { _id, type, method }) => {
+      let inc;
+      let filter = { _id: _id };
+      if (method === 'increment') {
+        inc = 1;
+      }
+      if (method === 'decrement') {
+        inc = -1;
+      }
+
+      const post = await Post.findOneAndUpdate(
+        filter,
+        { $inc: { [type]: inc } },
+        { new: true },
+      );
+      return post;
+    },
   },
 };
