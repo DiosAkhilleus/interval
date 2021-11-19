@@ -80,6 +80,14 @@ body {
   text-align: justify;
 }
 
+.reply-button-div {
+  
+    width: 30%;
+    text-align: center;
+    margin-left: 27rem;
+    background-color: ghostwhite;
+}
+
 .post-content-tags {
   background-color: ghostwhite;
   height: 20%;
