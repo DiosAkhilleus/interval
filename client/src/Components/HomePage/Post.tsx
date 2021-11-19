@@ -6,6 +6,7 @@ import {
   MODIFY_POST_WITH_VOTE,
   MODIFY_USER_VOTE_FIELDS,
 } from '../../graphql/mutations';
+import { Button } from 'react-bootstrap';
 
 interface Entities {
   tags: Array<string>;
@@ -107,7 +108,11 @@ const Post = ({
           setDislikedByUser(false);
           setPostDislikes(postDislikes - 1);
           modifyPostWithVote({
-            variables: { id: postInfo.id, type: 'dislikes', method: 'decrement' },
+            variables: {
+              id: postInfo.id,
+              type: 'dislikes',
+              method: 'decrement',
+            },
           });
           modifyUserVoteFields({
             variables: {
@@ -120,9 +125,7 @@ const Post = ({
         }
       }
       setLikedByUser(!likedByUser);
-      
     }
-
 
     if (vote === 'dislike') {
       if (dislikedByUser) {
@@ -169,7 +172,6 @@ const Post = ({
         }
       }
       setDislikedByUser(!dislikedByUser);
-      
     }
   };
 
@@ -197,7 +199,13 @@ const Post = ({
             @{data ? data.getUserById[0].public_handle : ''}
           </div>
         </div>
-        <div className="post-content-details">{postInfo.text}</div>
+        <div className="post-content-details">
+          <div>{postInfo.text}</div>
+          <div className="reply-button-div">
+          <Button href={`/post/${postInfo.id}`} variant="outline-primary">See Post & Replies...</Button>{' '}  
+          </div>
+        </div>
+
         <div className="post-content-tags">
           {postInfo.entities.tags.map((el: string, id: number) => (
             <div style={{ marginLeft: 10 }}>{el}</div>

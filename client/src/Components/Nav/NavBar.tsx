@@ -14,7 +14,7 @@ const NavBar = (props: Props) => {
           <Nav className="me-auto">
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/profile">Profile</Nav.Link>
-            <Nav.Link href="/post">Create Post</Nav.Link>
+            <Nav.Link href="/createpost">Create Post</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">

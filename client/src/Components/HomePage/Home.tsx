@@ -1,7 +1,6 @@
-import React from 'react';
-import Loading from '../Loading';
+import Loading from '../PublicComponents/Loading';
 import Post from './Post';
-import PleaseLogIn from '../PleaseLogIn';
+import PleaseLogIn from '../PublicComponents/PleaseLogIn';
 import FriendActivityCard from './FriendActivityCard';
 import Discover from './Discover';
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
