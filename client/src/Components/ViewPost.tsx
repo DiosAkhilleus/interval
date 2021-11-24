@@ -6,7 +6,8 @@ import { useQuery } from '@apollo/client';
 interface Props {}
 
 const ViewPost = (props: Props) => {
-  const { postedBy, postId } = useParams<{ postedBy?: string, postId?: string }>();
+  const { postedBy, postId } =
+    useParams<{ postedBy?: string; postId?: string }>();
   const postFromId = useQuery(GET_POST_BY_ID, { variables: { id: postId } });
   let history = useHistory();
 
@@ -33,19 +34,28 @@ const ViewPost = (props: Props) => {
               alt="back-button"
             />
           </div>
-          <div className='post-page-title'>{postFromId.data ? postFromId.data.getPostById[0].title : '' }</div>
-          <div className='post-page-creator'>{postCreator.data ? postCreator.data.getUserById[0].name : ''}</div>
+          <div className="post-page-title">
+            {postFromId.data ? postFromId.data.getPostById[0].title : ''}
+          </div>
+          <div className="post-page-creator">
+            {postCreator.data ? postCreator.data.getUserById[0].name : ''}
+          </div>
         </div>
-        <div className='post-page-main-content'>
-        {postFromId.data ? (
-          <h3 style={{margin: 10}}>{postFromId.data.getPostById[0].text}</h3>
-        ) : (
-          ''
-        )}
+        <div className="post-page-main-content">
+          {postFromId.data ? (
+            <h3 style={{ margin: 10 }}>
+              {postFromId.data.getPostById[0].text}
+            </h3>
+          ) : (
+            ''
+          )}
         </div>
-        <div className='post-page-replies-container'>
-          <div className='post-page-reply'></div>
+        <div className="post-page-replies-container">
+          <div className="post-page-reply"></div>
+          <div className="post-page-reply"></div>
+          
         </div>
+        
       </div>
     </div>
   );
