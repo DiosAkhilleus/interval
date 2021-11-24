@@ -29,7 +29,7 @@ function App() {
           <Route path="/home" exact component={Home} />
           <Route path="/profile" component={Profile} />
           <Route path="/createpost" component={CreatePost} />
-          <Route path='/post/:postId' children={<ViewPost />} />
+          <Route path='/post/:postedBy/:postId' children={<ViewPost />} />
           <Route path="/getusers" component={GetUsers} />
           <Route path="/settings" component={Settings} />
         </Switch>
