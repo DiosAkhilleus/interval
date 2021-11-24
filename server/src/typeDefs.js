@@ -36,6 +36,7 @@ export const typeDefs = gql`
     posted_by: ID!
     repost_count: Int! 
     reposted: Boolean! 
+    title: String!
     text: String!
     in_reply_to_public_handle: String!
     in_reply_to_user_id: String! 
@@ -50,6 +51,7 @@ export const typeDefs = gql`
     posted_by: ID!
     repost_count: Int! 
     reposted: Boolean! 
+    title: String!
     text: String!
     in_reply_to_public_handle: String!
     in_reply_to_user_id: String! 
