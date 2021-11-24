@@ -28,13 +28,13 @@ body {
   display: flex;
   flex-direction: row;
   background-color: white;
-  filter: drop-shadow(0 0 0.75rem rgb(147, 147, 147));
-  border: 2px solid dimgray;
+  filter: drop-shadow(0 0 0.75rem rgb(13, 66, 75));
+  border: 2px solid rgb(8, 42, 52);
   border-radius: 3px;
 }
 
 .post-inner-container {
-  border-right: 2px solid dimgray;
+  border-right: 2px solid rgb(8, 42, 52);
   display: flex;
   flex-direction: column;
   width: 80%;
@@ -49,7 +49,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid dimgray
+  border-bottom: 2px solid rgb(8, 42, 52)
 }
 
 .post-creator-name-grouping {
@@ -94,7 +94,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-top: 1px solid dimgray
+  border-top: 1px solid rgb(8, 42, 52)
 }
 
 .post-interaction-container {
@@ -119,10 +119,12 @@ body {
   width: 100vw;
   display: flex;
   flex-direction: row;
+  background: rgb(0,61,147);
+  background: linear-gradient(138deg, rgba(0,61,147,1) 0%, rgba(31,116,170,1) 35%, rgba(129,234,255,1) 100%);
 }
 
 .home-page-discover {
-  background-color: blanchedalmond;
+  background-color: transparent;
   height: 100%;
   width: 20%;
   display: flex;
@@ -134,6 +136,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
 }
 
 .discover-search {
@@ -141,11 +144,11 @@ body {
 }
 
 .home-page-posts {
-  background-color: rgb(232, 232, 232);
+  background-color: transparent;
   height: 100%;
   width: 65%;
-  border-right: 2px solid dimgray;
-  border-left: 2px solid dimgray;
+  border-right: 2px solid rgb(8, 42, 52);
+  border-left: 2px solid rgb(8, 42, 52);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -153,7 +156,7 @@ body {
 }
 
 .home-friend-activity {
-  background-color:white;
+  background-color: transparent;
   height: 100%;
   width: 20%;
   display: flex;
@@ -167,8 +170,11 @@ body {
   min-height: 80px;
   height: 80px;
   background-color: rgb(46, 46, 46);
-  border-bottom:2px solid rgb(136, 136, 136);
+  margin-bottom: 4px;
   color: rgb(255, 255, 255);
+  border-right: 2px solid rgb(8, 42, 52);
+  border-top: 2px solid rgb(8, 42, 52);
+  border-bottom: 2px solid rgb(8, 42, 52);
 }
 
 .create-post-container {
@@ -176,4 +182,34 @@ body {
   flex-direction: column;
   align-items: center;
   height: 84vh;
+}
+
+.public-text {
+  margin: auto;
+  padding-bottom: 200px;
+}
+
+.public-title {
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-size: 80px;
+  margin: auto;
+  color: white;
+  text-align: center;
+}
+
+.public-subtitle {
+  margin: auto;
+  text-align: center;
+  color: white;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-size: 30px;
+}
+
+.public-page-container {
+  height: 84vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  background: rgb(0,61,147);
+  background: linear-gradient(138deg, rgba(0,61,147,1) 0%, rgba(31,116,170,1) 35%, rgba(129,234,255,1) 100%);
 }
