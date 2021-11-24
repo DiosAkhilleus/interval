@@ -14,6 +14,7 @@ interface Entities {
 interface PostInterface {
   profile_image: string;
   posted_by: string;
+  title: string;
   tags: any;
   text: Array<string>;
   entities: Entities;
@@ -191,18 +192,30 @@ const Post = ({
               ''
             )}
             <h3 style={{ width: '100%', marginBottom: 4, marginLeft: 10 }}>
-              {data ? data.getUserById[0].name : ''}
+              {postInfo.title}
             </h3>
           </div>
           {/* <div className="post-interval-number">Interval #{interval} </div> */}
           <div className="post-creator-handle">
-            @{data ? data.getUserById[0].public_handle : ''}
+              {data ? (
+                <div>
+                  <strong>{data.getUserById[0].name}</strong>
+                  <div>@{data.getUserById[0].public_handle}</div>
+                </div>
+              ) : (
+                ''
+              )}
           </div>
         </div>
         <div className="post-content-details">
           <div>{postInfo.text}</div>
           <div className="reply-button-div">
-          <Button href={`/post/${postInfo.id}`} variant="outline-primary">See Post & Replies...</Button>{' '}  
+            <Button
+              href={`/post/${postInfo.posted_by}/${postInfo.id}`}
+              variant="outline-primary"
+            >
+              See Post & Replies...
+            </Button>{' '}
           </div>
         </div>
 
