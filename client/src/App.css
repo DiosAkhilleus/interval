@@ -278,5 +278,22 @@ body {
   margin: auto;
   margin-top: 30px;
   border-radius: 4px;
+}
+
+.post-page-replies-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
   
+}
+
+.post-page-reply {
+  width: 80%;
+  height: 140px;
+  min-height: 140px;
+  background-color: rgb(248, 249, 250);
+  filter: drop-shadow(0 0 0.2rem rgb(155, 155, 155));
+  margin: auto;
+  margin-top: 15px;
 }
