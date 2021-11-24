@@ -181,16 +181,6 @@ const Post = ({
       <div className="post-inner-container">
         <div className="post-creator-details">
           <div className="post-creator-name-grouping">
-            {!isLoading ? (
-              <img
-                style={{ height: '100%' }}
-                src={image}
-                alt="Profile"
-                className="rounded-circle img-thumbnail"
-              />
-            ) : (
-              ''
-            )}
             <h3 style={{ width: '100%', marginBottom: 4, marginLeft: 10 }}>
               {postInfo.title}
             </h3>
@@ -206,6 +196,16 @@ const Post = ({
                 ''
               )}
           </div>
+          {!isLoading ? (
+              <img
+                style={{ height: '95%', margin: 4 }}
+                src={image}
+                alt="Profile"
+                className="rounded-circle img-thumbnail"
+              />
+            ) : (
+              ''
+            )}
         </div>
         <div className="post-content-details">
           <div>{postInfo.text}</div>
