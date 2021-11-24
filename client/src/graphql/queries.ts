@@ -47,6 +47,7 @@ export const GET_POSTS = gql`
     posts {
       id
       text
+      title
       posted_by
       repost_count
       likes
@@ -62,6 +63,7 @@ export const GET_POST_BY_ID = gql`
   query GetPostById ($id: String!) {
     getPostById (_id: $id) {
       text
+      title
       posted_by
       repost_count
       likes
