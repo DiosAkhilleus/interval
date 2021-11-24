@@ -9,6 +9,7 @@ export const resolvers = {
     currentUser: async (_, { email }) => await User.find({ email: email }),
     getUserById: async (_, { _id }) => await User.find({ _id: _id }),
     posts: async () => await Post.find(),
+    getPostById: async (_, { _id }) => Post.find({ _id: _id }),
   },
   Mutation: {
     createUser: async (

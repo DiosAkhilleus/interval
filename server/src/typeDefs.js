@@ -8,6 +8,7 @@ export const typeDefs = gql`
     currentUser(email: String!): [User!]!
     getUserById(_id: String!): [User!]!
     posts: [PostWithEntities!]!
+    getPostById(_id: String!): [Post!]!
   }
   
   type User {
