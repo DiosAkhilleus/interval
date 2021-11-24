@@ -44,6 +44,10 @@ const PostSchema = new mongoose.Schema({
     type: String || null,
     required: false,
   },
+  title: {
+    type: String, 
+    required: true,
+  },
   replies: {
     type: Array, 
     required: true,
