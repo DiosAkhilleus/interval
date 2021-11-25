@@ -2,6 +2,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { GET_POST_BY_ID, GET_USER_BY_ID } from '../graphql/queries';
 import { useQuery } from '@apollo/client';
+import { Button } from 'react-bootstrap';
 
 interface Props {}
 
@@ -53,9 +54,10 @@ const ViewPost = (props: Props) => {
         <div className="post-page-replies-container">
           <div className="post-page-reply"></div>
           <div className="post-page-reply"></div>
-          
+        <Button style={{width: 150, margin: 'auto', marginBottom: 10, marginTop: 14}} variant="outline-primary">Post Reply</Button>
+
         </div>
-        
+
       </div>
     </div>
   );
