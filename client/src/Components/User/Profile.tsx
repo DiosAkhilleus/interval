@@ -7,21 +7,21 @@ import { CHANGE_DISPLAY_NAME } from '../../graphql/mutations';
 
 interface Props {}
 
-const Profile = (props: Props) => {
+const Profile = (props: Props) => { // User profile component for currently authenticated user
   const { user } = useAuth0();
   const { email } = user!;
 
-  const { loading, error, data } = useQuery(GET_CURRENT_USER, {
+  const { loading, error, data } = useQuery(GET_CURRENT_USER, { // Retrieves current user data from the db based on currently authenticated user
     variables: { email: email },
   });
 
-  const [changeName, changeNameData] = useMutation(CHANGE_DISPLAY_NAME)
+  const [changeName, changeNameData] = useMutation(CHANGE_DISPLAY_NAME) // Modifies user display name based on input
 
   console.log(changeNameData.data);
 
-  const [profileName, setProfileName] = useState('');
-  const [editName, setEditName] = useState(false);
-  const [userID, setUserID] = useState('');
+  const [profileName, setProfileName] = useState(''); // User's profile name
+  const [editName, setEditName] = useState(false); // Is user's name being edited?
+  const [userID, setUserID] = useState(''); // Current user's ID from the db
 
   useEffect(() => {
     if (data) {
@@ -30,12 +30,12 @@ const Profile = (props: Props) => {
     }
   }, [data])
   
-  const handleNameEdit = () => {
+  const handleNameEdit = () => { // Updates state to allow name editing
     console.log(profileName);
     setEditName(true);
   };
 
-  const confirmNameChange = () => {
+  const confirmNameChange = () => { // Posts new name to db
     console.log(profileName);
     setEditName(false);
     changeName({variables: {name: profileName, id: userID}})

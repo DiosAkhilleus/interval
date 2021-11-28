@@ -22,16 +22,16 @@ function App() {
 
   return (
     <div id="app">
-      <NavBar />
+      <NavBar /> {/* NavBar always visible. Components are replaced based on route */}
       <div>
         <Switch>
-          <Route path="/" exact component={Public} />
-          <Route path="/home" exact component={Home} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/createpost" component={CreatePost} />
-          <Route path='/post/:postedBy/:postId' children={<ViewPost />} />
-          <Route path="/getusers" component={GetUsers} />
-          <Route path="/settings" component={Settings} />
+          <Route path="/" exact component={Public} /> {/*External view page for unauthenticated users*/}
+          <Route path="/home" exact component={Home} /> {/*Home page for authenticated users*/}
+          <Route path="/profile" component={Profile} /> {/*Profile for currently authenticated user*/}
+          <Route path="/createpost" component={CreatePost} /> {/*Placeholder page for creating a post*/}
+          <Route path='/post/:postedBy/:postId' children={<ViewPost />} /> {/*Component for viewing a specific post*/}
+          <Route path="/getusers" component={GetUsers} /> {/*Component that retrieves all users*/}
+          <Route path="/settings" component={Settings} /> {/*Settings page for updating currently authenticated user's settings*/}
         </Switch>
       </div>
       <Footer />

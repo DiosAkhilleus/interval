@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({ // Schema for User database entry
   profile_image: {
     type: String,
     required: true,

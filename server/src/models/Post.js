@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const EntitySchema = new mongoose.Schema({
+const EntitySchema = new mongoose.Schema({ // Schema for entity object within Post
   user_mentions: {
     type: Array,
     required: true,
@@ -15,7 +15,7 @@ const EntitySchema = new mongoose.Schema({
   },
 });
 
-const PostSchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema({ // Schema for Post database entry
   posted_at: {
     type: String,
     required: true,

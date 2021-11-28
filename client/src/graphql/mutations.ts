@@ -1,5 +1,8 @@
 import { gql } from '@apollo/client';
 
+// GraphQL Apollo mutations file
+
+
 export const MODIFY_USER_VOTE_FIELDS = gql`
   mutation ModifyUserVoteFields(
     $user_id: String!

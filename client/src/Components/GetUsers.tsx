@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client';
 interface Props {}
 
 const GetUsers = (props: Props) => {
-  const { loading, error, data } = useQuery(GET_ALL_USERS);
+  const { loading, error, data } = useQuery(GET_ALL_USERS); // Retrieves all users – for future use?
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;

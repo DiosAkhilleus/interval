@@ -1,5 +1,7 @@
 import { gql } from 'apollo-server-express';
 
+// This file defines the type definition for GraphQL queries and mutations. 
+
 export const typeDefs = gql`
   type Query {
     hello: String!

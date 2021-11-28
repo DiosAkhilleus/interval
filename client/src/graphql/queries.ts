@@ -1,5 +1,8 @@
 import { gql } from '@apollo/client';
 
+// GraphQL Apollo queries file
+
+
 export const GET_ALL_USERS = gql`
   query GetUsers {
     users {

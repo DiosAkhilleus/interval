@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 interface Props {}
 
-const Public = (props: Props) => {
+const Public = (props: Props) => { // External view page for when a user is unauthenticated. 
 
   const { isAuthenticated } = useAuth0();
 

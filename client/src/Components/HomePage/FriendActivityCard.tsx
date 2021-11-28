@@ -6,7 +6,7 @@ interface Props {
   postName: string
 }
 
-const FriendActivityCard = ({handle, action, postName}: Props) => {
+const FriendActivityCard = ({handle, action, postName}: Props) => { // Placeholder friend activity card - will be modified in the future
 
   
   return (

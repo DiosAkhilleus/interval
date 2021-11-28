@@ -36,27 +36,26 @@ const Post = ({
   currentUserDislikedPosts,
   currentUserId,
 }: Props) => {
-  // console.log(currentUserDislikedPosts, currentUserLikedPosts)
 
-  const { isLoading } = useAuth0();
+  const { isLoading } = useAuth0(); 
   const [image, setImage] = useState('');
-  const [likedByUser, setLikedByUser] = useState(false);
-  const [dislikedByUser, setDislikedByUser] = useState(false);
-  const [postLikes, setPostLikes] = useState(postInfo.likes);
-  const [postDislikes, setPostDislikes] = useState(postInfo.dislikes);
+  const [likedByUser, setLikedByUser] = useState(false); // Is current post "liked" by user
+  const [dislikedByUser, setDislikedByUser] = useState(false); // Is current post "disliked" by user
+  const [postLikes, setPostLikes] = useState(postInfo.likes); // How many likes does the current post have
+  const [postDislikes, setPostDislikes] = useState(postInfo.dislikes); // How many dislikes does the current post have
 
-  const { loading, error, data } = useQuery(GET_USER_BY_ID, {
+  const { loading, error, data } = useQuery(GET_USER_BY_ID, { // Retrieves the user who created the current post
     variables: { id: postInfo.posted_by },
   });
 
-  const [modifyPostWithVote, modifyPostWithVoteData] = useMutation(
+  const [modifyPostWithVote, modifyPostWithVoteData] = useMutation( // Updates the post when the current user votes
     MODIFY_POST_WITH_VOTE
   );
-  const [modifyUserVoteFields, modifyUserVoteFieldsData] = useMutation(
+  const [modifyUserVoteFields, modifyUserVoteFieldsData] = useMutation( // Updates the current user's db fields regarding voting
     MODIFY_USER_VOTE_FIELDS
   );
 
-  useEffect(() => {
+  useEffect(() => { // Sets all the state variables depending on the information retrieved from the db
     if (data) {
       setImage(data.getUserById[0].profile_image);
       console.log(currentUserLikedPosts, currentUserDislikedPosts);
@@ -76,7 +75,7 @@ const Post = ({
     }
   }, [data]);
 
-  const handleVote = (vote: string) => {
+  const handleVote = (vote: string) => { // Handles a user's vote on a post
     if (vote === 'like') {
       if (likedByUser) {
         setPostLikes(postLikes - 1);

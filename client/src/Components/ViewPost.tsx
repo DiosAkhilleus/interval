@@ -7,21 +7,21 @@ import PostReplyModal from './PostReplyModal';
 
 interface Props {}
 
-const ViewPost = (props: Props) => {
-  const { postedBy, postId } =
-    useParams<{ postedBy?: string; postId?: string }>();
-  const postFromId = useQuery(GET_POST_BY_ID, { variables: { id: postId } });
+const ViewPost = (props: Props) => { // Component for viewing a post
+  const { postedBy, postId } = // URL params with ids of the creator and the post.
+    useParams<{ postedBy?: string; postId?: string }>(); 
+  const postFromId = useQuery(GET_POST_BY_ID, { variables: { id: postId } }); // Retrieves a post by its db _id
   let history = useHistory();
 
-  const postCreator = useQuery(GET_USER_BY_ID, {
+  const postCreator = useQuery(GET_USER_BY_ID, { // Retrieves a post's creator by user id
     variables: { id: postedBy },
   });
 
-  const handleGoBack = () => {
+  const handleGoBack = () => { // Handles when a user clicks the back button
     history.goBack();
   };
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false); // Is modal visible?
 
   return (
     <div className="home-page-container">

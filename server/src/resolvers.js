@@ -1,8 +1,8 @@
 import { User } from './models/User';
 import { Post } from './models/Post';
 
-export const resolvers = {
-  Query: {
+export const resolvers = { // GraphQL resolvers file
+  Query: { // Resolvers for information retrieval
     hello: () => 'Hello World',
     cheese: () => 'Give to me Cheese',
     users: async () => await User.find(),
@@ -11,7 +11,7 @@ export const resolvers = {
     posts: async () => await Post.find(),
     getPostById: async (_, { _id }) => Post.find({ _id: _id }),
   },
-  Mutation: {
+  Mutation: { // Resolvers for mutating database entries
     createUser: async (
       _,
       { profile_image, name, public_handle, email, followers, following, posts }

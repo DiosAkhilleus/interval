@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 interface Props {}
 
-const CreatePost = (props: Props) => {
+const CreatePost = (props: Props) => { // Placeholder create post component - will be updated in the future.
   const { isAuthenticated } = useAuth0();
 
   if (!isAuthenticated) {

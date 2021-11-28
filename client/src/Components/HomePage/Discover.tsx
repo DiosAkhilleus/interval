@@ -2,7 +2,7 @@ import React from 'react';
 
 interface Props {}
 
-const Discover = (props: Props) => {
+const Discover = (props: Props) => { // Placeholder discover component - will be modified in the future
   return (
     <div className="discover-container">
       <h3 style={{marginTop: 10}}>Search for Users</h3>

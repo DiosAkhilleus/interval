@@ -8,9 +8,9 @@ interface Props {
   onHide: ModifyShowModal;
 }
 
-const PostReplyModal = (props: Props) => {
+const PostReplyModal = (props: Props) => { // Modal popup for creating a reply to a post. 
 
-  const [replyText, setReplyText] = useState('');
+  const [replyText, setReplyText] = useState(''); // Current value of the reply's text.
 
   const handlePostReply = () => {
     console.log(replyText);
