@@ -6,7 +6,6 @@ type ModifyShowModal = () => void;
 interface Props {
   show: boolean;
   onHide: ModifyShowModal;
-  postTitle: string;
 }
 
 const PostReplyModal = (props: Props) => {
@@ -16,6 +15,7 @@ const PostReplyModal = (props: Props) => {
   const handlePostReply = () => {
     console.log(replyText);
     props.onHide();
+    setReplyText('');
   }
 
 
@@ -28,11 +28,11 @@ const PostReplyModal = (props: Props) => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          {props.postTitle}
+          Create a Reply
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Create Your Reply</h4>
+        <h4>Write Here</h4>
         <div style={{ height: 300 }}>
           <textarea
             style={{
