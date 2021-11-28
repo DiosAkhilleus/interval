@@ -13,9 +13,11 @@ const PostReplyModal = (props: Props) => { // Modal popup for creating a reply t
   const [replyText, setReplyText] = useState(''); // Current value of the reply's text.
 
   const handlePostReply = () => {
-    console.log(replyText);
-    props.onHide();
-    setReplyText('');
+    if (replyText !== '') {
+      console.log(replyText);
+      props.onHide();
+      setReplyText('');
+    }
   }
 
 
