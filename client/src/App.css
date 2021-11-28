@@ -5,17 +5,10 @@ body {
 .App {
   text-align: center;
   width: 100%;
-  margin: auto;
-  overflow: hidden;
 }
 
 .App-link {
   color: #61dafb;
-}
-
-.navbar {
-  width: 100% !important;
-  overflow-x: hidden !important;
 }
 
 .spinner {
@@ -280,7 +273,7 @@ body {
   filter: invert(100%);
   background-color: white;
   transform: rotate(360deg);
-  transition: all 0.s ease-in;
+  transition: all 0.2s ease-in;
   border-radius: 50%;
 }
 
@@ -294,6 +287,7 @@ body {
   margin: auto;
   margin-top: 30px;
   border-radius: 4px;
+  overflow: hidden;
 }
 
 .post-page-replies-container {
