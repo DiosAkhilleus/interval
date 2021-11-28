@@ -69,7 +69,7 @@ const ViewPost = (props: Props) => {
           >
             Post Reply
           </Button>
-          <PostReplyModal show={showModal} onHide={() => setShowModal(false)} postTitle={postFromId.data.getPostById[0].title}/>
+          <PostReplyModal show={showModal} onHide={() => setShowModal(false)}/>
         </div>
       </div>
     </div>
