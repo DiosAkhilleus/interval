@@ -4,10 +4,18 @@ body {
 
 .App {
   text-align: center;
+  width: 100%;
+  margin: auto;
+  overflow: hidden;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.navbar {
+  width: 100% !important;
+  overflow-x: hidden !important;
 }
 
 .spinner {
@@ -120,7 +128,8 @@ body {
 
 .home-page-container {
   height: 84vh;
-  width: 100vw;
+  width: 100%;
+  overflow-x: hidden;
   display: flex;
   flex-direction: row;
   background: rgb(0,61,147);
@@ -262,10 +271,17 @@ body {
   margin: 10px;
   width: 3.5%;
   min-width: 50px;
+  transition: all 0.5s ease-out;
+  border-radius: 50%;
 }
 
 .back-button:hover {
   cursor: pointer;
+  filter: invert(100%);
+  background-color: white;
+  transform: rotate(360deg);
+  transition: all 0.s ease-in;
+  border-radius: 50%;
 }
 
 .post-page-main-content {
