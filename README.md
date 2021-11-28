@@ -2,4 +2,10 @@
 
 Social media site that allows one post per week.
 
-Created by: DiosAkhilleus
+## Front-End: 
+    TypeScript, React, Apollo/GraphQL Client
+
+## Back-End: 
+    Node, Apollo-Express, GraphQL, MongoDB
+
+Created by: **DiosAkhilleus**
