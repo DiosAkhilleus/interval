@@ -207,7 +207,7 @@ const Post = ({
             )}
         </div>
         <div className="post-content-details">
-          <div>{postInfo.text}</div>
+          <div style={{marginBottom: 15}}>{postInfo.text}</div>
           <div className="reply-button-div">
             <Button
               href={`/post/${postInfo.posted_by}/${postInfo.id}`}
