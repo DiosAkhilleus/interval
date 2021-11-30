@@ -72,6 +72,7 @@ export const GET_POST_BY_ID = gql`
       repost_count
       likes
       dislikes
+      replies
     }
   }
 `
