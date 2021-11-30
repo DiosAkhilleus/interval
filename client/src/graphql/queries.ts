@@ -54,6 +54,7 @@ export const GET_POSTS = gql`
       posted_by
       repost_count
       likes
+      replies
       dislikes
       entities {
         tags
