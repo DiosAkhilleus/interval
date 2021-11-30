@@ -8,7 +8,7 @@ export const resolvers = { // GraphQL resolvers file
     users: async () => await User.find(),
     currentUser: async (_, { email }) => await User.find({ email: email }),
     getUserById: async (_, { _id }) => await User.find({ _id: _id }),
-    posts: async () => await Post.find(),
+    posts: async () => await Post.find({reply: false}),
     getPostById: async (_, { _id }) => Post.find({ _id: _id }),
   },
   Mutation: { // Resolvers for mutating database entries
