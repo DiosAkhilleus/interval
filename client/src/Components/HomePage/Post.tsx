@@ -21,6 +21,7 @@ interface PostInterface {
   likes: number;
   dislikes: number;
   id: string;
+  replies: Array<string>;
 }
 
 interface Props {
@@ -36,26 +37,30 @@ const Post = ({
   currentUserDislikedPosts,
   currentUserId,
 }: Props) => {
-
-  const { isLoading } = useAuth0(); 
+  const { isLoading } = useAuth0();
   const [image, setImage] = useState('');
   const [likedByUser, setLikedByUser] = useState(false); // Is current post "liked" by user
   const [dislikedByUser, setDislikedByUser] = useState(false); // Is current post "disliked" by user
   const [postLikes, setPostLikes] = useState(postInfo.likes); // How many likes does the current post have
   const [postDislikes, setPostDislikes] = useState(postInfo.dislikes); // How many dislikes does the current post have
 
-  const { loading, error, data } = useQuery(GET_USER_BY_ID, { // Retrieves the user who created the current post
+  const { loading, error, data } = useQuery(GET_USER_BY_ID, {
+    // Retrieves the user who created the current post
     variables: { id: postInfo.posted_by },
   });
+  console.log(postInfo);
 
-  const [modifyPostWithVote, modifyPostWithVoteData] = useMutation( // Updates the post when the current user votes
+  const [modifyPostWithVote, modifyPostWithVoteData] = useMutation(
+    // Updates the post when the current user votes
     MODIFY_POST_WITH_VOTE
   );
-  const [modifyUserVoteFields, modifyUserVoteFieldsData] = useMutation( // Updates the current user's db fields regarding voting
+  const [modifyUserVoteFields, modifyUserVoteFieldsData] = useMutation(
+    // Updates the current user's db fields regarding voting
     MODIFY_USER_VOTE_FIELDS
   );
 
-  useEffect(() => { // Sets all the state variables depending on the information retrieved from the db
+  useEffect(() => {
+    // Sets all the state variables depending on the information retrieved from the db
     if (data) {
       setImage(data.getUserById[0].profile_image);
       console.log(currentUserLikedPosts, currentUserDislikedPosts);
@@ -75,7 +80,8 @@ const Post = ({
     }
   }, [data]);
 
-  const handleVote = (vote: string) => { // Handles a user's vote on a post
+  const handleVote = (vote: string) => {
+    // Handles a user's vote on a post
     if (vote === 'like') {
       if (likedByUser) {
         setPostLikes(postLikes - 1);
@@ -186,28 +192,28 @@ const Post = ({
           </div>
           {/* <div className="post-interval-number">Interval #{interval} </div> */}
           <div className="post-creator-handle">
-              {data ? (
-                <div>
-                  <strong>{data.getUserById[0].name}</strong>
-                  <div>@{data.getUserById[0].public_handle}</div>
-                </div>
-              ) : (
-                ''
-              )}
-          </div>
-          {!isLoading ? (
-              <img
-                style={{ height: '95%', margin: 4 }}
-                src={image}
-                alt="Profile"
-                className="rounded-circle img-thumbnail"
-              />
+            {data ? (
+              <div>
+                <strong>{data.getUserById[0].name}</strong>
+                <div>@{data.getUserById[0].public_handle}</div>
+              </div>
             ) : (
               ''
             )}
+          </div>
+          {!isLoading ? (
+            <img
+              style={{ height: '95%', margin: 4 }}
+              src={image}
+              alt="Profile"
+              className="rounded-circle img-thumbnail"
+            />
+          ) : (
+            ''
+          )}
         </div>
         <div className="post-content-details">
-          <div style={{marginBottom: 15}}>{postInfo.text}</div>
+          <div style={{ marginBottom: 15 }}>{postInfo.text}</div>
           <div className="reply-button-div">
             <Button
               href={`/post/${postInfo.posted_by}/${postInfo.id}`}
@@ -222,6 +228,13 @@ const Post = ({
           {postInfo.entities.tags.map((el: string, id: number) => (
             <div style={{ marginLeft: 10 }}>{el}</div>
           ))}
+          <div style={{ width: '100%', textAlign: 'right', marginRight: 10 }}>
+            {postInfo.replies
+              ? postInfo.replies.length === 1
+                ? `${postInfo.replies.length} reply`
+                : `${postInfo.replies.length} replies`
+              : ''}{' '}
+          </div>
         </div>
       </div>
       <div className="post-interaction-container">
