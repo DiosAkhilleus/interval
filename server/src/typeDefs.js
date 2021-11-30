@@ -37,7 +37,7 @@ export const typeDefs = gql`
     posted_at: String!
     posted_by: ID!
     repost_count: Int! 
-    reposted: Boolean! 
+    reply: Boolean! 
     title: String!
     text: String!
     in_reply_to_public_handle: String!
@@ -45,6 +45,7 @@ export const typeDefs = gql`
     likes: Int! 
     dislikes: Int!
     entities: Entities!
+    replies: [String!]
   }
 
   type Post {
@@ -52,7 +53,7 @@ export const typeDefs = gql`
     posted_at: String!
     posted_by: ID!
     repost_count: Int! 
-    reposted: Boolean! 
+    reply: Boolean! 
     title: String!
     text: String!
     in_reply_to_public_handle: String!
@@ -62,6 +63,7 @@ export const typeDefs = gql`
     user_mentions: [String!]!
     tags: [String!]!
     urls: [String!]!
+    replies: [String!]
   }
 
   type UserVote {
