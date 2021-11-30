@@ -11,7 +11,7 @@ import './App.css';
 import GetUsers from './Components/GetUsers';
 import Settings from './Components/User/Settings';
 import Public from './Components/PublicComponents/Public';
-import ViewPost from './Components/ViewPost';
+import ViewPost from './Components/ViewPost/ViewPost';
 
 function App() {
   const { isLoading } = useAuth0();
