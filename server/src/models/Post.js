@@ -28,7 +28,7 @@ const PostSchema = new mongoose.Schema({ // Schema for Post database entry
     type: Number,
     required: true,
   },
-  reposted: {
+  reply: {
     type: Boolean,
     required: true,
   },
