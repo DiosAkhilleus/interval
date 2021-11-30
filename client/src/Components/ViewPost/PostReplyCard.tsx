@@ -37,7 +37,7 @@ const PostReplyCard = (props: Props) => {
       />
       <div className="post-page-reply">
         {postReply.data ? (
-          <ReplyCreator creatorID={postReply.data.getPostById[0].posted_by} />
+          <ReplyCreator replyInfo={postReply.data.getPostById[0]} />
         ) : (
           ''
         )}
