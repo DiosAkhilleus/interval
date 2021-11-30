@@ -74,3 +74,11 @@ export const GET_POST_BY_ID = gql`
     }
   }
 `
+
+export const GET_POST_REPLIES = gql`
+  query GetPostById($id: String!) {
+    getPostById (_id: $id) {
+      replies
+    }
+  }
+`
