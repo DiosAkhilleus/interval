@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_CURRENT_USER } from '../../graphql/queries';
-import { CHANGE_DISPLAY_NAME } from '../../graphql/mutations';
+import { CHANGE_DISPLAY_NAME, CHANGE_PUBLIC_HANDLE } from '../../graphql/mutations';
 import { Button } from 'react-bootstrap';
 import Loading from '../PublicComponents/Loading';
 import { Input } from 'reactstrap';
@@ -28,6 +28,7 @@ const Settings = (props: Props) => {
   });
 
   const [changeName, changeNameData] = useMutation(CHANGE_DISPLAY_NAME); // Modifies user display name based on input
+  const [changeHandle, changeHandleData] = useMutation(CHANGE_PUBLIC_HANDLE); // Modifies user display name based on input
 
   useEffect(() => {
     if (currentUser.data) {
@@ -40,8 +41,13 @@ const Settings = (props: Props) => {
   }, [currentUser]);
 
   const handleConfirmName = () => {
-    setEditName(false);
-    changeName({ variables: { name: newProfileName, id: userID } });
+    if (newProfileName.length <= 5) {
+      alert("Your public name must be at least 5 characters");
+    } else {
+      setEditName(false);
+      changeName({ variables: { name: newProfileName, id: userID } });
+    }
+    
   };
 
   const handleCancelNameChange = () => {
@@ -50,7 +56,12 @@ const Settings = (props: Props) => {
   };
 
   const handleConfirmHandle = () => {
-    setEditHandle(false);
+    if (newPublicHandle.length <= 3) {
+      alert("You must create a handle of at least 4 characters")
+    } else {
+      setEditHandle(false);
+      changeHandle({ variables: { public_handle: newPublicHandle, id: userID } });
+    }
   };
 
   const handleCancelHandleChange = () => {
@@ -73,6 +84,8 @@ const Settings = (props: Props) => {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'row' }}>
               <Input
+                maxLength={20}
+                minLength={3}
                 value={newProfileName}
                 onChange={(e) => setNewProfileName(e.target.value)}
               />
@@ -96,7 +109,7 @@ const Settings = (props: Props) => {
           <div style={{ display: 'flex', flexDirection: 'row' }}>
             <strong style={{ fontSize: 24 }}>Public Handle:</strong>{' '}
             <div style={{ fontSize: 24, marginLeft: 14 }}>
-              @{newPublicHandle}
+              {newPublicHandle !== '' ? `@${newPublicHandle}` : ''}
             </div>
           </div>
           {!editHandle ? (
@@ -109,6 +122,8 @@ const Settings = (props: Props) => {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'row' }}>
               <Input
+                maxLength={15}
+                minLength={3}
                 value={newPublicHandle}
                 onChange={(e) => setNewPublicHandle(e.target.value)}
               />
