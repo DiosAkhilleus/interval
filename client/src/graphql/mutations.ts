@@ -43,6 +43,17 @@ export const CHANGE_DISPLAY_NAME = gql`
   }
 `;
 
+export const CHANGE_PUBLIC_HANDLE = gql`
+  mutation ChangePublicHandle(
+    $public_handle: String!
+    $id: String!
+  ) {
+    changeHandle(public_handle: $public_handle, _id: $id) {
+      public_handle
+    }
+  }
+`
+
 export const POST_USER = gql`
   mutation PostUser(
     $profile_image: String!
