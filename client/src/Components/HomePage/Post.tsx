@@ -7,6 +7,7 @@ import {
   MODIFY_USER_VOTE_FIELDS,
 } from '../../graphql/mutations';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 interface Entities {
   tags: Array<string>;
@@ -195,7 +196,9 @@ const Post = ({
             {data ? (
               <div>
                 <strong>{data.getUserById[0].name}</strong>
-                <div>@{data.getUserById[0].public_handle}</div>
+                <Link style={{color: 'darkcyan'}} to={`/user/${data.getUserById[0].public_handle}`}>
+                  <div>@{data.getUserById[0].public_handle}</div>
+                </Link>
               </div>
             ) : (
               ''
