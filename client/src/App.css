@@ -327,6 +327,46 @@
     border-radius: 4px;
   }
 
+  .settings-container {
+    height: 84vh;
+    width: 100%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: row;
+    background: rgb(0, 61, 147);
+    background: linear-gradient(
+      138deg,
+      rgba(0, 61, 147, 1) 0%,
+      rgba(31, 116, 170, 1) 35%,
+      rgba(129, 234, 255, 1) 100%
+    );
+  }
+
+  .settings-page-card {
+    width: 60%;
+    height: 90%;
+    background-color: rgb(248, 249, 250);
+    margin: auto;
+    filter: drop-shadow(0 0 0.75rem rgb(13, 66, 75));
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: scroll;
+  }
+
+  .settings-option {
+    border-bottom: 1px solid rgb(8, 42, 52);
+    height: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   @media only screen and (max-width: 1000px) {
     .home-page-container {
       flex-direction: column;
