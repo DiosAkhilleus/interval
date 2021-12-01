@@ -73,6 +73,14 @@ export const resolvers = { // GraphQL resolvers file
       });
       return user;
     },
+    changeHandle: async (_, { _id, public_handle }) => {
+      const filter = { _id: _id };
+      const update = { public_handle: public_handle };
+      let user = await User.findOneAndUpdate(filter, update, {
+        new: true,
+      });
+      return user;
+    },
     modifyPostWithVote: async (_, { _id, type, method }) => {
       let inc;
       let filter = { _id: _id };

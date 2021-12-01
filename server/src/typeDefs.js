@@ -85,6 +85,8 @@ export const typeDefs = gql`
     createPost(posted_at: String!, posted_by: ID!, repost_count: Int!, reposted: Boolean!, text: String!, in_reply_to_public_handle: String!, in_reply_to_user_id: String!, likes: Int!, dislikes: Int!, user_mentions: [String!]!, tags: [String!]!, urls: [String!]! ): Post!
 
     changeName(name: String!, _id: String!): User!
+    
+    changeHandle(public_handle: String!, _id: String!): User!
 
     modifyPostWithVote(_id: String!, type: String, method: String): UserVote!
 
