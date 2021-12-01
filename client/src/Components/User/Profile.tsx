@@ -11,7 +11,7 @@ const Profile = (props: Props) => { // User profile component for currently auth
   const { user } = useAuth0();
   const { email } = user!;
 
-  const { loading, error, data } = useQuery(GET_CURRENT_USER, { // Retrieves current user data from the db based on currently authenticated user
+  const currentUser = useQuery(GET_CURRENT_USER, { // Retrieves current user data from the db based on currently authenticated user
     variables: { email: email },
   });
 
@@ -24,11 +24,11 @@ const Profile = (props: Props) => { // User profile component for currently auth
   const [userID, setUserID] = useState(''); // Current user's ID from the db
 
   useEffect(() => {
-    if (data) {
-      setProfileName(data.currentUser[0].name);
-      setUserID(data.currentUser[0].id);
+    if (currentUser.data) {
+      setProfileName(currentUser.data.currentUser[0].name);
+      setUserID(currentUser.data.currentUser[0].id);
     }
-  }, [data])
+  }, [currentUser])
   
   const handleNameEdit = () => { // Updates state to allow name editing
     console.log(profileName);
@@ -46,7 +46,7 @@ const Profile = (props: Props) => { // User profile component for currently auth
       <div className="row align-items-center profile-header">
         <div className="col-md-2 mb-3">
           <img
-            src={data ? data.currentUser[0].profile_image : ''}
+            src={currentUser.data ? currentUser.data.currentUser[0].profile_image : ''}
             alt="Profile"
             className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
             style={{ width: 180 }}
@@ -73,7 +73,7 @@ const Profile = (props: Props) => { // User profile component for currently auth
             )}
           </div>
 
-          {data ? <h2>@{data.currentUser[0].public_handle}</h2> : ''}
+          {currentUser.data ? <h2>@{currentUser.data.currentUser[0].public_handle}</h2> : ''}
           <p className="lead text-muted">{email}</p>
         </div>
       </div>

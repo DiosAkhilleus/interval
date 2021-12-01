@@ -6,7 +6,6 @@ import { CHANGE_DISPLAY_NAME, CHANGE_PUBLIC_HANDLE } from '../../graphql/mutatio
 import { Button } from 'react-bootstrap';
 import Loading from '../PublicComponents/Loading';
 import { Input } from 'reactstrap';
-import { findByLabelText } from '@testing-library/dom';
 
 interface Props {}
 
@@ -26,8 +25,9 @@ const Settings = (props: Props) => {
     // Retrieves current user data from the db based on currently authenticated user
     variables: { email: email },
   });
-
+  //eslint-disable-next-line
   const [changeName, changeNameData] = useMutation(CHANGE_DISPLAY_NAME); // Modifies user display name based on input
+  //eslint-disable-next-line
   const [changeHandle, changeHandleData] = useMutation(CHANGE_PUBLIC_HANDLE); // Modifies user display name based on input
 
   useEffect(() => {
