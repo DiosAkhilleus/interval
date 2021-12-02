@@ -13,6 +13,7 @@ import Settings from './Components/User/Settings';
 import Public from './Components/PublicComponents/Public';
 import ViewPost from './Components/ViewPost/ViewPost';
 import ViewProfile from './Components/User/ViewProfile';
+import UserSearch from './Components/UserSearch';
 
 function App() {
   const { isLoading } = useAuth0();
@@ -28,7 +29,8 @@ function App() {
         <Switch>
           <Route path="/" exact component={Public} /> {/*External view page for unauthenticated users*/}
           <Route path="/home" exact component={Home} /> {/*Home page for authenticated users*/}
-          <Route path="/user/:userHandle" children={<ViewProfile />} />
+          <Route path="/users/search" component={UserSearch} />
+          <Route path="/users/:userID" children={<ViewProfile />} />
           <Route path="/profile" component={Profile} /> {/*Profile for currently authenticated user*/}
           <Route path="/createpost" component={CreatePost} /> {/*Placeholder page for creating a post*/}
           <Route path='/post/:postedBy/:postId' children={<ViewPost />} /> {/*Component for viewing a specific post*/}
