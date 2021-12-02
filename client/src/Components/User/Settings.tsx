@@ -72,6 +72,7 @@ const Settings = (props: Props) => {
   return (
     <div className="settings-container">
       <div className="settings-page-card">
+        <h2 style={{textAlign: 'center', borderBottom: '2px solid rgb(8, 42, 52)', marginTop: 6, marginBottom: 0, verticalAlign: 'middle', paddingBottom: 10}}>Your Settings</h2>
         <div className="settings-option">
           <div style={{ display: 'flex', flexDirection: 'row' }}>
             <strong style={{ fontSize: 24 }}>Display Name:</strong>{' '}
@@ -84,7 +85,7 @@ const Settings = (props: Props) => {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'row' }}>
               <Input
-                maxLength={20}
+                maxLength={15}
                 minLength={3}
                 value={newProfileName}
                 onChange={(e) => setNewProfileName(e.target.value)}
