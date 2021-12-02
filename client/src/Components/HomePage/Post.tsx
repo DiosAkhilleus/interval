@@ -49,7 +49,6 @@ const Post = ({
     // Retrieves the user who created the current post
     variables: { id: postInfo.posted_by },
   });
-  console.log(postInfo);
 
   const [modifyPostWithVote, modifyPostWithVoteData] = useMutation(
     // Updates the post when the current user votes
@@ -196,7 +195,7 @@ const Post = ({
             {data ? (
               <div>
                 <strong>{data.getUserById[0].name}</strong>
-                <Link style={{color: 'darkcyan'}} to={`/user/${data.getUserById[0].public_handle}`}>
+                <Link style={{color: 'darkcyan'}} to={`/users/${postInfo.posted_by}`}>
                   <div>@{data.getUserById[0].public_handle}</div>
                 </Link>
               </div>
