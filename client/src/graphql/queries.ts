@@ -45,6 +45,19 @@ export const GET_USER_BY_ID = gql`
   }
 `
 
+export const GET_USER_PROFILE = gql`
+  query GetUserById ($id: String!) {
+    getUserById(_id: $id) {
+      name
+      public_handle
+      profile_image
+      posts
+      followers
+      following
+    }
+  }
+`
+
 export const GET_POSTS = gql`
   query GetPosts {
     posts {
