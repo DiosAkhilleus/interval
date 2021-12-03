@@ -9,14 +9,19 @@ const CreatePost = (props: Props) => {
   // Placeholder create post component - will be updated in the future.
   const { isAuthenticated } = useAuth0();
 
+  const [postTitle, setPostTitle] = useState('');
+  const [postText, setPostText] = useState('');
   const [tagArr, setTagArr] = useState<string[]>([]);
   const [tagInputVal, setTagInputVal] = useState('');
+
 
   if (!isAuthenticated) {
     return <div>Please Log In</div>;
   }
 
-  const submitPost = () => {};
+  const submitPost = () => {
+    
+  };
 
   const handleAddTag = () => {
     let newTagArr = tagArr;
@@ -38,10 +43,12 @@ const CreatePost = (props: Props) => {
           style={{ width: '70%', marginBottom: 20 }}
           type="text"
           placeholder="Something descriptive..."
+          value={postTitle}
+          onChange={(e) => setPostTitle(e.target.value)}
         />
         <div
           style={{
-            fontSize: 34,
+            fontSize: 30,
             width: '90%',
             textAlign: 'center',
             borderTop: '2px solid rgb(8, 42, 52)',
@@ -59,6 +66,8 @@ const CreatePost = (props: Props) => {
             verticalAlign: 'top',
           }}
           placeholder="Something amusing..."
+          value={postText}
+          onChange={(e) => setPostText(e.target.value)}
         />
         <div
           style={{
@@ -76,6 +85,7 @@ const CreatePost = (props: Props) => {
             placeholder="Type tag here..."
             value={tagInputVal}
             onChange={(e) => setTagInputVal(e.target.value)}
+            maxLength={8}
           />
           <Button variant="outline-primary" onClick={() => handleAddTag()}>
             Add Tag
@@ -85,12 +95,15 @@ const CreatePost = (props: Props) => {
           style={{
             margin: 15,
             width: '80%',
-            minHeight: 38,
-            height: 38,
+            minHeight: 45,
+            height: 45,
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'flex-start',
             border: '1px solid grey',
+            overflowX: 'scroll',
+            overflowY: 'hidden',
+            borderRadius: 4,
           }}
         >
           {tagArr.map((tag, index) => (
@@ -101,11 +114,12 @@ const CreatePost = (props: Props) => {
                 flexDirection: 'row',
                 justifyContent: 'flex-start',
                 padding: '2px 10px 2px 10px',
-                marginTop: 3.5,
+                marginTop: 6,
                 marginLeft: 5,
+                marginRight: 5,
                 textAlign: 'center',
                 backgroundColor: 'lightgrey',
-                height: '80%',
+                height: 30,
                 borderRadius: 5,
               }}
             >
@@ -114,7 +128,9 @@ const CreatePost = (props: Props) => {
                 style={{ cursor: 'pointer' }}
                 src="https://img.icons8.com/material-outlined/24/000000/delete-sign.png"
                 alt="close"
-                onClick={() => {handleRemoveTag(index)}}
+                onClick={() => {
+                  handleRemoveTag(index);
+                }}
               />
             </div>
           ))}
