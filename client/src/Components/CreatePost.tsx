@@ -20,14 +20,14 @@ const CreatePost = (props: Props) => {
 
   const handleAddTag = () => {
     let newTagArr = tagArr;
-    console.log();
     newTagArr.push(tagInputVal);
     setTagArr(newTagArr);
     setTagInputVal('');
   };
 
   const handleRemoveTag = (ind: number) => {
-    console.log(ind);
+    let newTagArr = tagArr.filter((el, index) => index !== ind);
+    setTagArr(newTagArr);
   };
 
   return (
@@ -89,7 +89,7 @@ const CreatePost = (props: Props) => {
             height: 38,
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             border: '1px solid grey',
           }}
         >
@@ -101,8 +101,8 @@ const CreatePost = (props: Props) => {
                 flexDirection: 'row',
                 justifyContent: 'flex-start',
                 padding: '2px 10px 2px 10px',
-                marginTop: '3.5px',
-                marginRight: 10,
+                marginTop: 3.5,
+                marginLeft: 5,
                 textAlign: 'center',
                 backgroundColor: 'lightgrey',
                 height: '80%',
@@ -110,7 +110,12 @@ const CreatePost = (props: Props) => {
               }}
             >
               <div style={{ marginRight: 10 }}>{tag}</div>
-              <div onClick={() => handleRemoveTag(index)}>X</div>
+              <img
+                style={{ cursor: 'pointer' }}
+                src="https://img.icons8.com/material-outlined/24/000000/delete-sign.png"
+                alt="close"
+                onClick={() => {handleRemoveTag(index)}}
+              />
             </div>
           ))}
         </div>
