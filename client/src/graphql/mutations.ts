@@ -85,7 +85,6 @@ export const POST_USER = gql`
 `;
 
 export const CREATE_POST = gql`
-  union StringOrNull = String | Null,
   mutation CreatePost ($posted_at: String!, $posted_by: ID!, $repost_count: Number!, $reposted: Boolean!, $text: String!, $in_reply_to_public_handle: String! , $in_reply_to_user_id: String!, $likes: Number!, $dislikes: Number!, $user_mentions: [String], $tags: [String], $urls: [String] ) {
     createPost(
       posted_at: $posted_at, 
