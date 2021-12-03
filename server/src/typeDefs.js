@@ -110,6 +110,8 @@ export const typeDefs = gql`
       urls: [String!]!
     ): Post!
 
+    addReplyID(original_post_id: String!, reply_id: String!): Post
+
     changeName(name: String!, _id: String!): User!
 
     changeHandle(public_handle: String!, _id: String!): User!
