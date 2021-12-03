@@ -45,8 +45,15 @@ const Home = (props: Props) => { // Home component – includes both discover an
 
   return (
     <div className="home-page-container">
-      <div className="home-page-discover">
-        <Discover />
+      <div className="home-friend-activity">
+        <h2 style={{fontFamily: 'Roboto'}}>Friend Activity</h2>
+        {placeholderFriendActivity.map((el, ind) => (
+          <FriendActivityCard
+            handle={el.handle}
+            action={el.action}
+            postName={el.post_name}
+          />
+        ))}
       </div>
       <div className="home-page-posts">
         {data && userVotedPosts.data ? data.posts.map((el: any, id: number) => (
@@ -58,16 +65,6 @@ const Home = (props: Props) => { // Home component – includes both discover an
             key={id}
           />
         )) : ''}
-      </div>
-      <div className="home-friend-activity">
-        <h2 style={{fontFamily: 'Roboto'}}>Friend Activity</h2>
-        {placeholderFriendActivity.map((el, ind) => (
-          <FriendActivityCard
-            handle={el.handle}
-            action={el.action}
-            postName={el.post_name}
-          />
-        ))}
       </div>
     </div>
   );
