@@ -1,25 +1,66 @@
 import { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { useMutation } from '@apollo/client';
+import { CREATE_POST, ADD_REPLY_ID_TO_POST } from '../../graphql/mutations';
 
 type ModifyShowModal = () => void;
 
 interface Props {
   show: boolean;
   onHide: ModifyShowModal;
+  currentuserid: string;
+  originalposterid: string;
+  originalpostid: string;
 }
 
-const PostReplyModal = (props: Props) => { // Modal popup for creating a reply to a post. 
-
+const PostReplyModal = (props: Props) => {
+  // Modal popup for creating a reply to a post.
+  console.log(props.originalposterid, props.originalpostid);
   const [replyText, setReplyText] = useState(''); // Current value of the reply's text.
+
+  const [createPost, createPostData] = useMutation(CREATE_POST);
+  const [addReplyID, addReplyIDData] = useMutation(ADD_REPLY_ID_TO_POST);
 
   const handlePostReply = () => {
     if (replyText !== '') {
-      console.log(replyText);
+      createPost({
+        variables: {
+          posted_at: new Date().toString(),
+          posted_by: props.currentuserid,
+          repost_count: 0,
+          reposted: false,
+          reply: true,
+          title: 'Reply',
+          text: replyText,
+          in_reply_to_public_handle: '',
+          in_reply_to_user_id: props.originalposterid,
+          replies: [],
+          likes: 0,
+          dislikes: 0,
+          user_mentions: [],
+          tags: [],
+          urls: [],
+        },
+      }).then((results) => {
+        if (results.data.createPost.text === replyText) {
+          addReplyID({
+            variables: {
+              original_post_id: props.originalpostid, 
+              reply_id: results.data.createPost.id,
+            }
+          }).then((result) => {
+            if (result) {
+              window.location.reload();
+            }
+          })
+        }
+      });
       props.onHide();
       setReplyText('');
+    } else {
+      alert('Your reply must have text!');
     }
-  }
-
+  };
 
   return (
     <Modal
@@ -53,8 +94,12 @@ const PostReplyModal = (props: Props) => { // Modal popup for creating a reply t
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={props.onHide}>Close</Button>
-        <Button variant="primary" onClick={handlePostReply}>Post Reply</Button>
+        <Button variant="secondary" onClick={props.onHide}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={handlePostReply}>
+          Post Reply
+        </Button>
       </Modal.Footer>
     </Modal>
   );
