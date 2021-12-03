@@ -28,8 +28,16 @@ const PostSchema = new mongoose.Schema({ // Schema for Post database entry
     type: Number,
     required: true,
   },
+  reposted: {
+    type: Boolean, 
+    required: true,
+  },
   reply: {
     type: Boolean,
+    required: true,
+  },
+  title: {
+    type: String, 
     required: true,
   },
   text: {
@@ -43,10 +51,6 @@ const PostSchema = new mongoose.Schema({ // Schema for Post database entry
   in_reply_to_user_id: {
     type: String || null,
     required: false,
-  },
-  title: {
-    type: String, 
-    required: true,
   },
   replies: {
     type: Array, 
