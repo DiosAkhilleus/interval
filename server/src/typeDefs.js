@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-// This file defines the type definition for GraphQL queries and mutations. 
+// This file defines the type definition for GraphQL queries and mutations.
 
 export const typeDefs = gql`
   type Query {
@@ -12,7 +12,7 @@ export const typeDefs = gql`
     posts: [PostWithEntities!]!
     getPostById(_id: String!): [Post!]!
   }
-  
+
   type User {
     id: ID!
     profile_image: String!
@@ -36,34 +36,36 @@ export const typeDefs = gql`
     id: ID!
     posted_at: String!
     posted_by: ID!
-    repost_count: Int! 
-    reply: Boolean! 
+    repost_count: Int!
+    reposted: Boolean!
+    reply: Boolean!
     title: String!
     text: String!
     in_reply_to_public_handle: String!
-    in_reply_to_user_id: String! 
-    likes: Int! 
+    in_reply_to_user_id: String!
+    replies: [String!]!
+    likes: Int!
     dislikes: Int!
     entities: Entities!
-    replies: [String!]
   }
 
   type Post {
     id: ID!
     posted_at: String!
     posted_by: ID!
-    repost_count: Int! 
-    reply: Boolean! 
+    repost_count: Int!
+    reposted: Boolean!
+    reply: Boolean!
     title: String!
     text: String!
     in_reply_to_public_handle: String!
-    in_reply_to_user_id: String! 
-    likes: Int! 
+    in_reply_to_user_id: String!
+    replies: [String!]!
+    likes: Int!
     dislikes: Int!
     user_mentions: [String!]!
     tags: [String!]!
     urls: [String!]!
-    replies: [String!]
   }
 
   type UserVote {
@@ -73,24 +75,52 @@ export const typeDefs = gql`
   }
 
   type VoteFields {
-    user_id: String 
+    user_id: String
     post_id: String
     type: String
     method: String
   }
 
   type Mutation {
-    createUser(profile_image: String!, name: String!, public_handle: String!, email: String!, followers: [ID!]!, following: [ID!]!, posts: [ID]!): User!
+    createUser(
+      profile_image: String!
+      name: String!
+      public_handle: String!
+      email: String!
+      followers: [ID!]!
+      following: [ID!]!
+      posts: [ID]!
+    ): User!
 
-    createPost(posted_at: String!, posted_by: ID!, repost_count: Int!, reposted: Boolean!, text: String!, in_reply_to_public_handle: String!, in_reply_to_user_id: String!, likes: Int!, dislikes: Int!, user_mentions: [String!]!, tags: [String!]!, urls: [String!]! ): Post!
+    createPost(
+      posted_at: String!
+      posted_by: ID!
+      repost_count: Int!
+      reposted: Boolean!
+      reply: Boolean!
+      title: String!
+      text: String!
+      in_reply_to_public_handle: String!
+      in_reply_to_user_id: String!
+      replies: [String!]!
+      likes: Int!
+      dislikes: Int!
+      user_mentions: [String!]!
+      tags: [String!]!
+      urls: [String!]!
+    ): Post!
 
     changeName(name: String!, _id: String!): User!
-    
+
     changeHandle(public_handle: String!, _id: String!): User!
 
     modifyPostWithVote(_id: String!, type: String, method: String): UserVote!
 
-    modifyUserVoteFields(user_id: String!, post_id: String!, type: String!, method: String!): VoteFields!
+    modifyUserVoteFields(
+      user_id: String!
+      post_id: String!
+      type: String!
+      method: String!
+    ): VoteFields!
   }
 `;
- 
