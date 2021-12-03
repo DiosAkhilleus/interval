@@ -78,6 +78,14 @@ export const POST_USER = gql`
   }
 `;
 
+export const ADD_REPLY_ID_TO_POST = gql`
+  mutation AddReplyID($original_post_id: String!, $reply_id: String!) {
+    addReplyID(original_post_id: $original_post_id, reply_id: $reply_id) {
+      replies
+    }
+  }
+`;
+
 export const CREATE_POST = gql`
   mutation CreatePost(
     $posted_at: String!
@@ -113,7 +121,8 @@ export const CREATE_POST = gql`
       tags: $tags
       urls: $urls
     ) {
-      title
+      text
+      id
     }
   }
 `;
