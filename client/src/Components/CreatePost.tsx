@@ -1,26 +1,58 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useMutation, useQuery } from '@apollo/client';
 import { Input } from 'reactstrap';
 import { Button } from 'react-bootstrap';
+import { CREATE_POST } from '../graphql/mutations';
+import { GET_CURRENT_USER } from '../graphql/queries';
 
 interface Props {}
 
 const CreatePost = (props: Props) => {
   // Placeholder create post component - will be updated in the future.
   const { isAuthenticated } = useAuth0();
+  const { user } = useAuth0();
+  const { email } = user!;
 
   const [postTitle, setPostTitle] = useState('');
   const [postText, setPostText] = useState('');
   const [tagArr, setTagArr] = useState<string[]>([]);
   const [tagInputVal, setTagInputVal] = useState('');
 
+  const currentUser = useQuery(GET_CURRENT_USER, {
+    // Retrieves current user data from the db based on currently authenticated user
+    variables: { email: email },
+  });
+  const [createPost, createPostData] = useMutation(CREATE_POST);
 
   if (!isAuthenticated) {
     return <div>Please Log In</div>;
   }
 
   const submitPost = () => {
-    
+    createPost({
+      variables: {
+        posted_at: new Date().toString(),
+        posted_by: currentUser.data.currentUser[0].id,
+        repost_count: 0,
+        reposted: false,
+        reply: false,
+        title: postTitle,
+        text: postText,
+        in_reply_to_public_handle: '',
+        in_reply_to_user_id: '',
+        replies: [],
+        likes: 0,
+        dislikes: 0,
+        user_mentions: [],
+        tags: tagArr,
+        urls: [],
+      },
+    }).then((results) => {
+      if (results.data.createPost.title === postTitle) {
+        window.location.reload();
+      }
+    });
   };
 
   const handleAddTag = () => {
