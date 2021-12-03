@@ -30,29 +30,33 @@ const CreatePost = (props: Props) => {
   }
 
   const submitPost = () => {
-    createPost({
-      variables: {
-        posted_at: new Date().toString(),
-        posted_by: currentUser.data.currentUser[0].id,
-        repost_count: 0,
-        reposted: false,
-        reply: false,
-        title: postTitle,
-        text: postText,
-        in_reply_to_public_handle: '',
-        in_reply_to_user_id: '',
-        replies: [],
-        likes: 0,
-        dislikes: 0,
-        user_mentions: [],
-        tags: tagArr,
-        urls: [],
-      },
-    }).then((results) => {
-      if (results.data.createPost.title === postTitle) {
-        window.location.reload();
-      }
-    });
+    if (postTitle !== '' && postText !== '') {
+      createPost({
+        variables: {
+          posted_at: new Date().toString(),
+          posted_by: currentUser.data.currentUser[0].id,
+          repost_count: 0,
+          reposted: false,
+          reply: false,
+          title: postTitle,
+          text: postText,
+          in_reply_to_public_handle: '',
+          in_reply_to_user_id: '',
+          replies: [],
+          likes: 0,
+          dislikes: 0,
+          user_mentions: [],
+          tags: tagArr,
+          urls: [],
+        },
+      }).then((results) => {
+        if (results.data.createPost.title === postTitle) {
+          window.location.reload();
+        }
+      });
+    } else {
+      alert ("Your post must have a title and text!");
+    }
   };
 
   const handleAddTag = () => {
