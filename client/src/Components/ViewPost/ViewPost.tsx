@@ -4,11 +4,13 @@ import {
   GET_POST_BY_ID,
   GET_USER_BY_ID,
   GET_POST_REPLIES,
+  GET_CURRENT_USER,
 } from '../../graphql/queries';
 import { useQuery } from '@apollo/client';
 import { Button } from 'react-bootstrap';
 import PostReplyModal from './PostReplyModal';
 import PostReplyCard from './PostReplyCard';
+import { useAuth0 } from '@auth0/auth0-react';
 
 interface Props {}
 
@@ -19,6 +21,13 @@ const ViewPost = (props: Props) => {
   const postFromId = useQuery(GET_POST_BY_ID, { variables: { id: postId } }); // Retrieves a post by its db _id
   let history = useHistory();
 
+  const { user } = useAuth0();
+  const { email } = user!;
+
+  const currentUser = useQuery(GET_CURRENT_USER, {
+    variables: { email: email },
+  });
+
   const postCreator = useQuery(GET_USER_BY_ID, {
     // Retrieves a post's creator by user id
     variables: { id: postedBy },
@@ -27,7 +36,7 @@ const ViewPost = (props: Props) => {
   const postReplies = useQuery(GET_POST_REPLIES, {
     variables: { id: postId },
   });
-  
+
   const handleGoBack = () => {
     // Handles when a user clicks the back button
     history.goBack();
@@ -78,7 +87,17 @@ const ViewPost = (props: Props) => {
           >
             Post Reply
           </Button>
-          <PostReplyModal show={showModal} onHide={() => setShowModal(false)} />
+          {currentUser.data ? (
+            <PostReplyModal
+              show={showModal}
+              onHide={() => setShowModal(false)}
+              currentuserid={currentUser.data.currentUser[0].id}
+              originalposterid={postedBy!}
+              originalpostid={postId!}
+            />
+          ) : (
+            ''
+          )}
           {postReplies.data
             ? postReplies.data.getPostById[0].replies.map(
                 (post: string, index: number) => (
