@@ -10,7 +10,8 @@ import { useQuery } from '@apollo/client';
 import { Button } from 'react-bootstrap';
 import PostReplyModal from './PostReplyModal';
 import PostReplyCard from './PostReplyCard';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
+import Loading from '../PublicComponents/Loading';
 
 interface Props {}
 
@@ -111,4 +112,6 @@ const ViewPost = (props: Props) => {
   );
 };
 
-export default ViewPost;
+export default withAuthenticationRequired(ViewPost, {
+  onRedirecting: () => <Loading />,
+});
