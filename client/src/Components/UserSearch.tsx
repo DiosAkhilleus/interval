@@ -1,18 +1,16 @@
-import React from 'react'
-import Discover from './HomePage/Discover';
+import React from 'react';
+import Discover from './Discover';
 
-interface Props {
-  
-}
+interface Props {}
 
 const UserSearch = (props: Props) => {
   return (
-    <div className='home-page-container'>
-      <div className="home-page-discover">
-        <Discover />
+    <div className="home-page-container">
+      <div className="create-post-card">
+          <Discover />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserSearch
+export default UserSearch;
