@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
 import { useMutation, useQuery } from '@apollo/client';
 import { Input } from 'reactstrap';
 import { Button } from 'react-bootstrap';
 import { CREATE_POST } from '../graphql/mutations';
 import { GET_CURRENT_USER } from '../graphql/queries';
+import Loading from './PublicComponents/Loading';
 
 interface Props {}
 
@@ -183,4 +184,6 @@ const CreatePost = (props: Props) => {
   );
 };
 
-export default CreatePost;
+export default withAuthenticationRequired(CreatePost, {
+  onRedirecting: () => <Loading />,
+});
