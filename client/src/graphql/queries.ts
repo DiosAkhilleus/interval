@@ -13,6 +13,17 @@ export const GET_ALL_USERS = gql`
   }
 `;
 
+export const GET_USER_WITH_REGEX = gql`
+  query GetUserByHandleRegex ($regex: String!) {
+    getUserByHandleRegex(regex: $regex) {
+      name
+      email
+      public_handle
+      id
+    }
+  }
+`
+
 export const GET_CURRENT_USER = gql`
   query CurrentUser ($email: String!) {
     currentUser(email: $email) {
