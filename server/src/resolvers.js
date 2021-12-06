@@ -10,6 +10,7 @@ export const resolvers = {
     users: async () => await User.find(),
     currentUser: async (_, { email }) => await User.find({ email: email }),
     getUserById: async (_, { _id }) => await User.find({ _id: _id }),
+    getUserByHandleRegex: async(_, { regex }) => await User.find({public_handle: { $regex: regex, $options: 'i' }}),
     posts: async () => await Post.find({ reply: false }),
     getPostById: async (_, { _id }) => Post.find({ _id: _id }),
   },

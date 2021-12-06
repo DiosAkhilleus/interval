@@ -9,6 +9,7 @@ export const typeDefs = gql`
     users: [User!]!
     currentUser(email: String!): [User!]!
     getUserById(_id: String!): [User!]!
+    getUserByHandleRegex(regex: String!): [User!]!
     posts: [PostWithEntities!]!
     getPostById(_id: String!): [Post!]!
   }
