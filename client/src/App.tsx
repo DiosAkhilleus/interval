@@ -13,7 +13,7 @@ import Settings from './Components/User/Settings';
 import Public from './Components/PublicComponents/Public';
 import ViewPost from './Components/ViewPost/ViewPost';
 import ViewProfile from './Components/User/ViewProfile';
-import UserSearch from './Components/UserSearch';
+import UserSearch from './Components/UserSearch/UserSearch';
 
 function App() {
   const { isLoading } = useAuth0();

@@ -20,6 +20,7 @@ export const GET_USER_WITH_REGEX = gql`
       email
       public_handle
       id
+      profile_image
     }
   }
 `

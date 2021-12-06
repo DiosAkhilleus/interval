@@ -48,6 +48,14 @@ export const CHANGE_PUBLIC_HANDLE = gql`
   }
 `;
 
+export const ADD_USER_ID_TO_FOLLOWING = gql`
+  mutation AddUserIdToFollowing($current_user_id: String!, $followed_user_id: String!) {
+    addUserIdToFollowing(current_user_id: $current_user_id, followed_user_id: $followed_user_id) {
+      id
+    }
+  }
+`;
+
 export const POST_USER = gql`
   mutation PostUser(
     $profile_image: String!
