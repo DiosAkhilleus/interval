@@ -33,6 +33,7 @@ export const GET_CURRENT_USER = gql`
       profile_image
       public_handle
       id
+      posts
     }
   }
 `;

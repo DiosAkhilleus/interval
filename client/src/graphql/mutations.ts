@@ -40,6 +40,14 @@ export const CHANGE_DISPLAY_NAME = gql`
   }
 `;
 
+export const CHANGE_PROFILE_IMAGE = gql`
+  mutation ChangeProfileImage($profile_image: String!, $id: String!) {
+    changeProfileImage(profile_image: $profile_image, _id: $id) {
+      profile_image
+    }
+  }
+`;
+
 export const CHANGE_PUBLIC_HANDLE = gql`
   mutation ChangePublicHandle($public_handle: String!, $id: String!) {
     changeHandle(public_handle: $public_handle, _id: $id) {
