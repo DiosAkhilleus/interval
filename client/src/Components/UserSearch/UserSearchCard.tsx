@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useMutation, useQuery } from '@apollo/client';
+import {
+  COMPLETE_USER_FOLLOW_REQUEST,
+  COMPLETE_USER_UNFOLLOW_REQUEST,
+} from '../../graphql/mutations';
+import { GET_USER_FOLLOWING } from '../../graphql/queries';
 
 interface User {
   name: string;
@@ -12,22 +18,53 @@ interface User {
 
 interface Props {
   user: User;
+  currentuserid: string;
 }
 
 const UserSearchCard = (props: Props) => {
+  console.log(props.currentuserid);
   const { isAuthenticated } = useAuth0();
   const { user } = useAuth0();
   const { email } = user!;
 
   const [isFollowed, setIsFollowed] = useState(false);
 
+  const [completeUserFollowRequest, completeUserFollowRequestData] = useMutation(COMPLETE_USER_FOLLOW_REQUEST);
+  const [completeUserUnfollowRequest, completeUserUnfollowRequestData] = useMutation(COMPLETE_USER_UNFOLLOW_REQUEST);
+
+  const userFollowing = useQuery(GET_USER_FOLLOWING, {
+    variables: {
+      id: props.currentuserid,
+    },
+  });
+
+  useEffect(() => {
+    if (userFollowing.data) {
+      if (
+        userFollowing.data.getUserById[0].following.indexOf(props.user.id) > -1
+      ) {
+        setIsFollowed(true);
+      }
+    }
+  }, [userFollowing]);
+
   const handleToggleFollow = () => {
     if (!isFollowed) {
       setIsFollowed(true);
-      console.log('now following');
+      completeUserFollowRequest({
+        variables: {
+          current_user_id: props.currentuserid,
+          target_user_id: props.user.id,
+        },
+      });
     } else if (isFollowed) {
       setIsFollowed(false);
-      console.log('no longer following');
+      completeUserUnfollowRequest({
+        variables: {
+          current_user_id: props.currentuserid, 
+          target_user_id: props.user.id
+        }
+      })
     }
     setIsFollowed(!isFollowed);
   };
