@@ -48,9 +48,17 @@ export const CHANGE_PUBLIC_HANDLE = gql`
   }
 `;
 
-export const ADD_USER_ID_TO_FOLLOWING = gql`
-  mutation AddUserIdToFollowing($current_user_id: String!, $followed_user_id: String!) {
-    addUserIdToFollowing(current_user_id: $current_user_id, followed_user_id: $followed_user_id) {
+export const COMPLETE_USER_FOLLOW_REQUEST = gql`
+  mutation CompleteUserFollowRequest($current_user_id: String!, $target_user_id: String!) {
+    completeUserFollowRequest(current_user_id: $current_user_id, target_user_id: $target_user_id) {
+      id
+    }
+  }
+`;
+
+export const COMPLETE_USER_UNFOLLOW_REQUEST = gql`
+  mutation CompleteUserUnfollowRequest($current_user_id: String!, $target_user_id: String!) {
+    completeUserUnfollowRequest(current_user_id: $current_user_id, target_user_id: $target_user_id) {
       id
     }
   }

@@ -57,6 +57,14 @@ export const GET_USER_BY_ID = gql`
   }
 `
 
+export const GET_USER_FOLLOWING = gql`
+  query GetUserById ($id: String!) {
+    getUserById(_id: $id) {
+      following
+    }
+  }
+`
+
 export const GET_USER_PROFILE = gql`
   query GetUserById ($id: String!) {
     getUserById(_id: $id) {
