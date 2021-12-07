@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import { useAuth0 } from '@auth0/auth0-react';
 import { useMutation, useQuery } from '@apollo/client';
 import {
   COMPLETE_USER_FOLLOW_REQUEST,
@@ -23,9 +22,6 @@ interface Props {
 
 const UserSearchCard = (props: Props) => {
   console.log(props.currentuserid);
-  const { isAuthenticated } = useAuth0();
-  const { user } = useAuth0();
-  const { email } = user!;
 
   const [isFollowed, setIsFollowed] = useState(false);
 
