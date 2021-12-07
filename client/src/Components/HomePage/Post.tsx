@@ -84,6 +84,7 @@ const Post = ({
     // Handles a user's vote on a post
     if (vote === 'like') {
       if (likedByUser) {
+        setLikedByUser(!likedByUser);
         setPostLikes(postLikes - 1);
         modifyPostWithVote({
           variables: { id: postInfo.id, type: 'likes', method: 'decrement' },
@@ -96,8 +97,8 @@ const Post = ({
             method: 'remove',
           },
         });
-      }
-      if (!likedByUser) {
+      } else if (!likedByUser) {
+        setLikedByUser(!likedByUser);
         setPostLikes(postLikes + 1);
         modifyPostWithVote({
           variables: { id: postInfo.id, type: 'likes', method: 'increment' },
@@ -130,11 +131,11 @@ const Post = ({
           });
         }
       }
-      setLikedByUser(!likedByUser);
     }
 
     if (vote === 'dislike') {
       if (dislikedByUser) {
+        setDislikedByUser(!dislikedByUser);
         setPostDislikes(postDislikes - 1);
         modifyPostWithVote({
           variables: { id: postInfo.id, type: 'dislikes', method: 'decrement' },
@@ -147,8 +148,8 @@ const Post = ({
             method: 'remove',
           },
         });
-      }
-      if (!dislikedByUser) {
+      } else if (!dislikedByUser) {
+        setDislikedByUser(!dislikedByUser);
         setPostDislikes(postDislikes + 1);
         modifyPostWithVote({
           variables: { id: postInfo.id, type: 'dislikes', method: 'increment' },
@@ -177,7 +178,6 @@ const Post = ({
           });
         }
       }
-      setDislikedByUser(!dislikedByUser);
     }
   };
 

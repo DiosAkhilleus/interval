@@ -143,22 +143,22 @@ export const resolvers = {
       let replacementArr;
 
       if (type === 'liked_posts') {
-        if (method === 'add') {
+        if (method === 'add' && liked_posts.indexOf(post_id) < 0) {
           replacementArr = [...liked_posts, post_id];
         }
         if (method === 'remove') {
-          replacementArr = liked_posts.filter((post) => post !== post_id);
+          replacementArr = liked_posts.filter(post => post !== post_id);
         }
       }
       if (type === 'disliked_posts') {
-        if (method === 'add') {
+        if (method === 'add' && disliked_posts.indexOf(post_id) < 0) {
           replacementArr = [...disliked_posts, post_id];
         }
-        if (method === 'subtract') {
-          replacementArr = disliked_posts.filter((post) => post !== post_id);
+        if (method === 'remove') {
+          replacementArr = disliked_posts.filter(post => post !== post_id);
         }
       }
-      const newUser = User.findOneAndUpdate(
+      const newUser = await User.findOneAndUpdate(
         filter,
         { [type]: replacementArr },
         { new: true }
