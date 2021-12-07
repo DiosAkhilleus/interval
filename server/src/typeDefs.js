@@ -119,6 +119,10 @@ export const typeDefs = gql`
 
     modifyPostWithVote(_id: String!, type: String, method: String): UserVote!
 
+    completeUserFollowRequest(current_user_id: String!, target_user_id: String!): User
+    
+    completeUserUnfollowRequest(current_user_id: String!, target_user_id: String!): User
+
     modifyUserVoteFields(
       user_id: String!
       post_id: String!

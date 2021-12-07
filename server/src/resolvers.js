@@ -10,7 +10,8 @@ export const resolvers = {
     users: async () => await User.find(),
     currentUser: async (_, { email }) => await User.find({ email: email }),
     getUserById: async (_, { _id }) => await User.find({ _id: _id }),
-    getUserByHandleRegex: async(_, { regex }) => await User.find({public_handle: { $regex: regex, $options: 'i' }}),
+    getUserByHandleRegex: async (_, { regex }) =>
+      await User.find({ public_handle: { $regex: regex, $options: 'i' } }),
     posts: async () => await Post.find({ reply: false }),
     getPostById: async (_, { _id }) => Post.find({ _id: _id }),
   },
@@ -155,6 +156,62 @@ export const resolvers = {
         { new: true }
       );
       return newUser;
+    },
+    completeUserFollowRequest: async (
+      _,
+      { current_user_id, target_user_id }
+    ) => {
+      let currentUser = await User.find({ _id: current_user_id });
+      let replacementFollowingArr;
+      if (currentUser[0].following) {
+        replacementFollowingArr = [...currentUser[0].following, target_user_id];
+      } else {
+        replacementFollowingArr = [target_user_id];
+      }
+      debugger;
+      const updatedCurrentUser = await User.findOneAndUpdate(
+        { _id: current_user_id },
+        { following: replacementFollowingArr },
+        { new: true }
+      );
+      let targetUser = await User.find({ _id: target_user_id });
+      let replacementFollowersArr;
+      if (targetUser[0].followers) {
+        replacementFollowersArr = [...targetUser[0].followers, current_user_id];
+      } else {
+        replacementFollowersArr = [current_user_id];
+      }
+      const updatedTargetUser = await User.findOneAndUpdate(
+        { _id: target_user_id },
+        { followers: replacementFollowersArr },
+        { new: true }
+      );
+
+      return updatedCurrentUser;
+    },
+    completeUserUnfollowRequest: async (
+      _,
+      { current_user_id, target_user_id }
+    ) => {
+      let currentUser = await User.find({ _id: current_user_id });
+      const replacementFollowingArr = currentUser[0].following.filter(
+        id => id !== target_user_id
+      );
+      const updatedCurrentUser = await User.findOneAndUpdate(
+        { _id: current_user_id },
+        { following: replacementFollowingArr },
+        { new: true }
+      );
+      let targetUser = await User.find({ _id: target_user_id });
+      const replacementFollowersArr = targetUser[0].followers.filter(
+        id => id !== current_user_id
+      );
+      const updatedTargetUser = await User.findOneAndUpdate(
+        { _id: target_user_id },
+        { followers: replacementFollowersArr },
+        { new: true }
+      );
+      return updatedCurrentUser;
     },
   },
 };
