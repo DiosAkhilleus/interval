@@ -107,6 +107,14 @@ export const resolvers = {
       });
       return user;
     },
+    changeProfileImage: async (_, { _id, profile_image }) => {
+      const filter = { _id: _id };
+      const update = { profile_image: profile_image };
+      let user = await User.findOneAndUpdate(filter, update, {
+        new: true,
+      });
+      return user;
+    },
     modifyPostWithVote: async (_, { _id, type, method }) => {
       let inc;
       let filter = { _id: _id };
@@ -168,7 +176,6 @@ export const resolvers = {
       } else {
         replacementFollowingArr = [target_user_id];
       }
-      debugger;
       const updatedCurrentUser = await User.findOneAndUpdate(
         { _id: current_user_id },
         { following: replacementFollowingArr },

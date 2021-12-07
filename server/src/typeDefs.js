@@ -117,6 +117,8 @@ export const typeDefs = gql`
 
     changeHandle(public_handle: String!, _id: String!): User!
 
+    changeProfileImage(profile_image: String!, _id: String!): User
+
     modifyPostWithVote(_id: String!, type: String, method: String): UserVote!
 
     completeUserFollowRequest(current_user_id: String!, target_user_id: String!): User
