@@ -4,6 +4,7 @@ import Loading from '../PublicComponents/Loading';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_CURRENT_USER } from '../../graphql/queries';
 import { CHANGE_DISPLAY_NAME } from '../../graphql/mutations';
+import Post from '../HomePage/Post';
 
 interface Props {}
 
@@ -29,6 +30,7 @@ const Profile = (props: Props) => {
     if (currentUser.data) {
       setProfileName(currentUser.data.currentUser[0].name);
       setUserID(currentUser.data.currentUser[0].id);
+      console.log(currentUser.data.currentUser[0].posts)
     }
   }, [currentUser]);
 
@@ -45,9 +47,25 @@ const Profile = (props: Props) => {
     changeName({ variables: { name: profileName, id: userID } });
   };
 
+  interface Entities {
+    tags: Array<string>;
+  }
+  interface Post {
+    profile_image: string;
+    posted_by: string;
+    title: string;
+    tags: any;
+    text: Array<string>;
+    entities: Entities;
+    likes: number;
+    dislikes: number;
+    id: string;
+    replies: Array<string>;
+  }
+
   return (
     <div className="home-page-container">
-      <div className='post-page-card'>
+      <div className="post-page-card" style={{overflowX: 'hidden'}}>
         <div className="row align-items-center profile-header">
           <div className="col-md-2 mb-3">
             <img
@@ -62,28 +80,6 @@ const Profile = (props: Props) => {
             />
           </div>
           <div className="col-md text-center text-md-left">
-            <div className="display-name-box">
-              {editName ? (
-                <div>
-                  <input
-                    placeholder={profileName}
-                    type="text"
-                    onChange={(e) => setProfileName(e.target.value)}
-                  ></input>
-                  <button onClick={() => confirmNameChange()}>
-                    Confirm Name
-                  </button>
-                </div>
-              ) : (
-                <div>
-                  <div>{profileName}</div>
-                  <button onClick={() => handleNameEdit()}>
-                    Edit Display Name
-                  </button>
-                </div>
-              )}
-            </div>
-
             {currentUser.data ? (
               <h2>@{currentUser.data.currentUser[0].public_handle}</h2>
             ) : (
@@ -91,11 +87,6 @@ const Profile = (props: Props) => {
             )}
             <p className="lead text-muted">{email}</p>
           </div>
-        </div>
-        <div className="row">
-          <pre className="col-12 text-light bg-dark p-4">
-            {JSON.stringify(user, null, 2)}
-          </pre>
         </div>
       </div>
     </div>
