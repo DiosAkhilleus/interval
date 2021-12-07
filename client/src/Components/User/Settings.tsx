@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_CURRENT_USER } from '../../graphql/queries';
-import { CHANGE_DISPLAY_NAME, CHANGE_PUBLIC_HANDLE } from '../../graphql/mutations';
+import {
+  CHANGE_DISPLAY_NAME,
+  CHANGE_PUBLIC_HANDLE,
+  CHANGE_PROFILE_IMAGE,
+} from '../../graphql/mutations';
 import { Button } from 'react-bootstrap';
 import Loading from '../PublicComponents/Loading';
 import { Input } from 'reactstrap';
@@ -15,9 +19,12 @@ const Settings = (props: Props) => {
 
   const [profileName, setProfileName] = useState(''); // User's profile name
   const [newProfileName, setNewProfileName] = useState('');
-  const [publicHandle, setPublicHandle] = useState(''); // User's profile name
+  const [profileImage, setProfileImage] = useState('');
+  const [newProfileImage, setNewProfileImage] = useState('');
+  const [publicHandle, setPublicHandle] = useState(''); // User's public handle
   const [newPublicHandle, setNewPublicHandle] = useState('');
   const [editName, setEditName] = useState(false); // Is user's name being edited?
+  const [editProfileImage, setEditProfileImage] = useState(false);
   const [editHandle, setEditHandle] = useState(false); // Is user's name being edited?
   const [userID, setUserID] = useState(''); // Current user's ID from the db
 
@@ -29,7 +36,9 @@ const Settings = (props: Props) => {
   const [changeName, changeNameData] = useMutation(CHANGE_DISPLAY_NAME); // Modifies user display name based on input
   //eslint-disable-next-line
   const [changeHandle, changeHandleData] = useMutation(CHANGE_PUBLIC_HANDLE); // Modifies user display name based on input
-
+  //eslint-disable-next-line
+  const [changeProfileImage, changeProfileImageData] = useMutation(CHANGE_PROFILE_IMAGE) //Modifies user profile img based on input
+  
   useEffect(() => {
     if (currentUser.data) {
       setProfileName(currentUser.data.currentUser[0].name);
@@ -37,17 +46,18 @@ const Settings = (props: Props) => {
       setUserID(currentUser.data.currentUser[0].id);
       setPublicHandle(currentUser.data.currentUser[0].public_handle);
       setNewPublicHandle(currentUser.data.currentUser[0].public_handle);
+      setProfileImage(currentUser.data.currentUser[0].profile_image);
+      setNewProfileImage(currentUser.data.currentUser[0].profile_image);
     }
   }, [currentUser]);
 
   const handleConfirmName = () => {
     if (newProfileName.length <= 5) {
-      alert("Your public name must be at least 5 characters");
+      alert('Your public name must be at least 5 characters');
     } else {
       setEditName(false);
       changeName({ variables: { name: newProfileName, id: userID } });
     }
-    
   };
 
   const handleCancelNameChange = () => {
@@ -57,10 +67,12 @@ const Settings = (props: Props) => {
 
   const handleConfirmHandle = () => {
     if (newPublicHandle.length <= 3) {
-      alert("You must create a handle of at least 4 characters")
+      alert('You must create a handle of at least 4 characters');
     } else {
       setEditHandle(false);
-      changeHandle({ variables: { public_handle: newPublicHandle, id: userID } });
+      changeHandle({
+        variables: { public_handle: newPublicHandle, id: userID },
+      });
     }
   };
 
@@ -69,10 +81,37 @@ const Settings = (props: Props) => {
     setEditHandle(false);
   };
 
+  const handleCancelProfileImageChange = () => {
+    setNewProfileImage(profileImage);
+    setEditProfileImage(false);
+  };
+
+  const handleConfirmProfileImage = () => {
+    if (newProfileImage === '') {
+      alert('You must enter an image url');
+    } else {
+      setEditProfileImage(false);
+      changeProfileImage({
+        variables: { profile_image: newProfileImage, id: userID },
+      });
+    }
+  };
+
   return (
     <div className="settings-container">
       <div className="settings-page-card">
-        <h2 style={{textAlign: 'center', borderBottom: '2px solid rgb(8, 42, 52)', marginTop: 6, marginBottom: 0, verticalAlign: 'middle', paddingBottom: 10}}>Your Settings</h2>
+        <h2
+          style={{
+            textAlign: 'center',
+            borderBottom: '2px solid rgb(8, 42, 52)',
+            marginTop: 6,
+            marginBottom: 0,
+            verticalAlign: 'middle',
+            paddingBottom: 10,
+          }}
+        >
+          Your Settings
+        </h2>
         <div className="settings-option">
           <div style={{ display: 'flex', flexDirection: 'row' }}>
             <strong style={{ fontSize: 24 }}>Display Name:</strong>{' '}
@@ -138,6 +177,51 @@ const Settings = (props: Props) => {
               <Button
                 style={{ marginLeft: 10 }}
                 onClick={() => handleConfirmHandle()}
+              >
+                Confirm
+              </Button>
+            </div>
+          )}
+        </div>
+        <div className="settings-option">
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <strong style={{ fontSize: 24 }}>Profile Image:</strong>{' '}
+            <img
+              src={newProfileImage}
+              alt="profile-img"
+              className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
+              style={{ height: 80, marginLeft: 20 }}
+            />
+          </div>
+          {!editProfileImage ? (
+            <Button
+              variant="outline-primary"
+              onClick={() => setEditProfileImage(true)}
+            >
+              Change Profile Image
+            </Button>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <Input
+                value={newProfileImage}
+                onChange={(e) => setNewProfileImage(e.target.value)}
+              />
+              <Button
+                variant="danger"
+                style={{ marginLeft: 10 }}
+                onClick={() => handleCancelProfileImageChange()}
+              >
+                Cancel
+              </Button>
+              <Button
+                style={{ marginLeft: 10 }}
+                onClick={() => handleConfirmProfileImage()}
               >
                 Confirm
               </Button>
