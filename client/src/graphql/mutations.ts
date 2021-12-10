@@ -110,6 +110,14 @@ export const ADD_REPLY_ID_TO_POST = gql`
   }
 `;
 
+export const ADD_REPLY_ID_TO_USER_POSTS = gql`
+  mutation AddReplyIDToUserPosts($user_id: String!, $reply_id: String!) {
+    addReplyIDToUserPosts(user_id: $user_id, reply_id: $reply_id) {
+      id
+    }
+  }
+`
+
 export const CREATE_POST = gql`
   mutation CreatePost(
     $posted_at: String!
@@ -121,6 +129,7 @@ export const CREATE_POST = gql`
     $text: String!
     $in_reply_to_public_handle: String!
     $in_reply_to_user_id: String!
+    $in_reply_to_post_id: String!
     $replies: [String!]!
     $likes: Int!
     $dislikes: Int!
@@ -138,6 +147,7 @@ export const CREATE_POST = gql`
       text: $text
       in_reply_to_public_handle: $in_reply_to_public_handle
       in_reply_to_user_id: $in_reply_to_user_id
+      in_reply_to_post_id: $in_reply_to_post_id
       replies: $replies
       likes: $likes
       dislikes: $dislikes
