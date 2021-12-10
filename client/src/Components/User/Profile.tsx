@@ -5,6 +5,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { GET_CURRENT_USER } from '../../graphql/queries';
 import { CHANGE_DISPLAY_NAME } from '../../graphql/mutations';
 import Post from '../HomePage/Post';
+import UserProfilePost from './UserProfilePost';
 
 interface Props {}
 
@@ -30,7 +31,7 @@ const Profile = (props: Props) => {
     if (currentUser.data) {
       setProfileName(currentUser.data.currentUser[0].name);
       setUserID(currentUser.data.currentUser[0].id);
-      console.log(currentUser.data.currentUser[0].posts)
+      console.log(currentUser.data.currentUser[0].posts);
     }
   }, [currentUser]);
 
@@ -65,7 +66,7 @@ const Profile = (props: Props) => {
 
   return (
     <div className="home-page-container">
-      <div className="post-page-card" style={{overflowX: 'hidden'}}>
+      <div className="post-page-card" style={{ overflowX: 'hidden' }}>
         <div className="row align-items-center profile-header">
           <div className="col-md-2 mb-3">
             <img
@@ -87,6 +88,15 @@ const Profile = (props: Props) => {
             )}
             <p className="lead text-muted">{email}</p>
           </div>
+        </div>
+        <div className="user-profile-posts">
+          {currentUser.data
+            ? currentUser.data.currentUser[0].posts.map(
+                (post: string, index: number) => (
+                  <UserProfilePost postID={post} userID={userID} key={index} />
+                )
+              )
+            : ''}
         </div>
       </div>
     </div>
