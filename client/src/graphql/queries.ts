@@ -108,6 +108,8 @@ export const GET_POST_BY_ID = gql`
       dislikes
       replies
       reply
+      in_reply_to_user_id
+      in_reply_to_post_id
     }
   }
 `
