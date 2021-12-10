@@ -44,6 +44,7 @@ export const typeDefs = gql`
     text: String!
     in_reply_to_public_handle: String!
     in_reply_to_user_id: String!
+    in_reply_to_post_id: String!
     replies: [String!]!
     likes: Int!
     dislikes: Int!
@@ -61,6 +62,7 @@ export const typeDefs = gql`
     text: String!
     in_reply_to_public_handle: String!
     in_reply_to_user_id: String!
+    in_reply_to_post_id: String!
     replies: [String!]!
     likes: Int!
     dislikes: Int!
@@ -103,6 +105,7 @@ export const typeDefs = gql`
       text: String!
       in_reply_to_public_handle: String!
       in_reply_to_user_id: String!
+      in_reply_to_post_id: String!
       replies: [String!]!
       likes: Int!
       dislikes: Int!
@@ -112,6 +115,8 @@ export const typeDefs = gql`
     ): Post!
 
     addReplyID(original_post_id: String!, reply_id: String!): Post
+
+    addReplyIDToUserPosts(user_id: String!, reply_id: String!): User
 
     changeName(name: String!, _id: String!): User!
 

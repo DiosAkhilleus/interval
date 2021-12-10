@@ -45,6 +45,7 @@ export const resolvers = {
         text,
         in_reply_to_public_handle,
         in_reply_to_user_id,
+        in_reply_to_post_id,
         replies,
         likes,
         dislikes,
@@ -68,6 +69,7 @@ export const resolvers = {
         text: text,
         in_reply_to_public_handle: in_reply_to_public_handle,
         in_reply_to_user_id: in_reply_to_user_id,
+        in_reply_to_post_id: in_reply_to_post_id,
         replies: replies,
         likes: likes,
         dislikes: dislikes,
@@ -90,6 +92,20 @@ export const resolvers = {
         }
       );
       return newPost;
+    },
+    addReplyIDToUserPosts: async (_, { user_id, reply_id }) => {
+      const user = await User.find({ _id: user_id });
+      let newPostList = [reply_id, ...user[0].posts];
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: user_id },
+        {
+          posts: newPostList,
+        },
+        {
+          new: true,
+        }
+      );
+      return updatedUser;
     },
     changeName: async (_, { _id, name }) => {
       const filter = { _id: _id };
