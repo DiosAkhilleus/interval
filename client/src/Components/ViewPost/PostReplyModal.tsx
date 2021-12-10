@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-import { CREATE_POST, ADD_REPLY_ID_TO_POST } from '../../graphql/mutations';
+import { CREATE_POST, ADD_REPLY_ID_TO_POST, ADD_REPLY_ID_TO_USER_POSTS } from '../../graphql/mutations';
 
 type ModifyShowModal = () => void;
 
@@ -20,6 +20,7 @@ const PostReplyModal = (props: Props) => {
 
   const [createPost, createPostData] = useMutation(CREATE_POST);
   const [addReplyID, addReplyIDData] = useMutation(ADD_REPLY_ID_TO_POST);
+  const [addReplyIDToUserPosts, addReplyIDToUserPostsData] = useMutation(ADD_REPLY_ID_TO_USER_POSTS)
 
   const handlePostReply = () => {
     if (replyText !== '') {
@@ -34,6 +35,7 @@ const PostReplyModal = (props: Props) => {
           text: replyText,
           in_reply_to_public_handle: '',
           in_reply_to_user_id: props.originalposterid,
+          in_reply_to_post_id: props.originalpostid,
           replies: [],
           likes: 0,
           dislikes: 0,
@@ -48,8 +50,14 @@ const PostReplyModal = (props: Props) => {
               original_post_id: props.originalpostid, 
               reply_id: results.data.createPost.id,
             }
-          }).then((result) => {
-            if (result) {
+          })
+          addReplyIDToUserPosts({
+            variables: {
+              user_id: props.currentuserid,
+              reply_id: results.data.createPost.id
+            }
+          }).then((response) => {
+            if (response.data.addReplyIDToUserPosts.id === props.currentuserid) {
               window.location.reload();
             }
           })

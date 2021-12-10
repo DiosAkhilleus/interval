@@ -43,6 +43,7 @@ const CreatePost = (props: Props) => {
           text: postText,
           in_reply_to_public_handle: '',
           in_reply_to_user_id: '',
+          in_reply_to_post_id: '',
           replies: [],
           likes: 0,
           dislikes: 0,

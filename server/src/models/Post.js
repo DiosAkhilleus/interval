@@ -52,6 +52,10 @@ const PostSchema = new mongoose.Schema({ // Schema for Post database entry
     type: String || null,
     required: false,
   },
+  in_reply_to_post_id: {
+    type: String || null,
+    required: false,
+  },
   replies: {
     type: Array, 
     required: true,
