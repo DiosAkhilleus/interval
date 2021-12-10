@@ -21,8 +21,6 @@ const Profile = (props: Props) => {
 
   const [changeName, changeNameData] = useMutation(CHANGE_DISPLAY_NAME); // Modifies user display name based on input
 
-  console.log(changeNameData.data);
-
   const [profileName, setProfileName] = useState(''); // User's profile name
   const [editName, setEditName] = useState(false); // Is user's name being edited?
   const [userID, setUserID] = useState(''); // Current user's ID from the db
@@ -90,7 +88,7 @@ const Profile = (props: Props) => {
           </div>
         </div>
         <div className="user-profile-posts">
-          {currentUser.data
+          {currentUser.data && currentUser.data.currentUser[0].posts.length > 0
             ? currentUser.data.currentUser[0].posts.map(
                 (post: string, index: number) => (
                   <UserProfilePost postID={post} userID={userID} key={index} />
