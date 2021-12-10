@@ -25,10 +25,16 @@ const UserProfilePost = (props: Props) => {
   return (
     <div>
       {postData.data ? (
-        postData.data.getPostById[0].reply ? (
-          <div>{postData.data.getPostById[0].text}</div>
+        postData.data.getPostById[0].reply === true ? (
+          <Link
+            to={`/post/${postData.data.getPostById[0].in_reply_to_user_id}/${postData.data.getPostById[0].in_reply_to_post_id}`}
+          >
+            Reply: {postData.data.getPostById[0].text}
+          </Link>
         ) : (
-          <Link to={`/post/${props.userID}/${props.postID}`}>{postData.data.getPostById[0].title}</Link>
+          <Link to={`/post/${props.userID}/${props.postID}`}>
+            {postData.data.getPostById[0].title}
+          </Link>
         )
       ) : (
         ''
