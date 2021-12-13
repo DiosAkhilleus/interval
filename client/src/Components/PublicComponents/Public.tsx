@@ -5,7 +5,7 @@ interface Props {}
 
 const Public = (props: Props) => { // External view page for when a user is unauthenticated. 
 
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0(); // Checks if current user is authenticated
 
   if (isAuthenticated) {
     window.location.href = '/home';

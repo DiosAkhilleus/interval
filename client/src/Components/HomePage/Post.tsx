@@ -82,8 +82,11 @@ const Post = ({
 
   const handleVote = (vote: string) => {
     // Handles a user's vote on a post
-    if (vote === 'like') {
-      if (likedByUser) {
+
+
+    if (vote === 'like') { // If the user "likes" the post...
+
+      if (likedByUser) {  // If the post has already been liked by the user...
         setLikedByUser(!likedByUser);
         setPostLikes(postLikes - 1);
         modifyPostWithVote({
@@ -97,7 +100,7 @@ const Post = ({
             method: 'remove',
           },
         });
-      } else if (!likedByUser) {
+      } else if (!likedByUser) { // If the post has not been liked by the user
         setLikedByUser(!likedByUser);
         setPostLikes(postLikes + 1);
         modifyPostWithVote({
@@ -111,7 +114,7 @@ const Post = ({
             method: 'add',
           },
         });
-        if (dislikedByUser === true) {
+        if (dislikedByUser === true) { // If the post has already been "disliked" by the user before later being "liked"...
           setDislikedByUser(false);
           setPostDislikes(postDislikes - 1);
           modifyPostWithVote({
@@ -132,9 +135,10 @@ const Post = ({
         }
       }
     }
+    
+    if (vote === 'dislike') { // If the user "dislikes" the post...
 
-    if (vote === 'dislike') {
-      if (dislikedByUser) {
+      if (dislikedByUser) { // If the post has already been "disliked" by the user...
         setDislikedByUser(!dislikedByUser);
         setPostDislikes(postDislikes - 1);
         modifyPostWithVote({
@@ -148,7 +152,7 @@ const Post = ({
             method: 'remove',
           },
         });
-      } else if (!dislikedByUser) {
+      } else if (!dislikedByUser) { // If the post has not already been "disliked" by the user...
         setDislikedByUser(!dislikedByUser);
         setPostDislikes(postDislikes + 1);
         modifyPostWithVote({
@@ -162,7 +166,7 @@ const Post = ({
             method: 'add',
           },
         });
-        if (likedByUser === true) {
+        if (likedByUser === true) { // If the post was already "liked" by the user before later being "disliked"...
           setPostLikes(postLikes - 1);
           setLikedByUser(false);
           modifyPostWithVote({
@@ -190,7 +194,6 @@ const Post = ({
               {postInfo.title}
             </h3>
           </div>
-          {/* <div className="post-interval-number">Interval #{interval} </div> */}
           <div className="post-creator-handle">
             {data ? (
               <div>

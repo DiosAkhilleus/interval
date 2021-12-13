@@ -15,14 +15,16 @@ interface Props {
 
 const PostReplyModal = (props: Props) => {
   // Modal popup for creating a reply to a post.
-  console.log(props.originalposterid, props.originalpostid);
   const [replyText, setReplyText] = useState(''); // Current value of the reply's text.
 
-  const [createPost, createPostData] = useMutation(CREATE_POST);
-  const [addReplyID, addReplyIDData] = useMutation(ADD_REPLY_ID_TO_POST);
-  const [addReplyIDToUserPosts, addReplyIDToUserPostsData] = useMutation(ADD_REPLY_ID_TO_USER_POSTS)
+  //eslint-disable-next-line
+  const [createPost, createPostData] = useMutation(CREATE_POST); // Mutation that sends creates the reply in the DB
+  //eslint-disable-next-line
+  const [addReplyID, addReplyIDData] = useMutation(ADD_REPLY_ID_TO_POST); // Mutation that adds the new reply's ID to a post's "replies" field
+  //eslint-disable-next-line
+  const [addReplyIDToUserPosts, addReplyIDToUserPostsData] = useMutation(ADD_REPLY_ID_TO_USER_POSTS) // Adds the reply's ID to the currently authenticated user's "posts" field
 
-  const handlePostReply = () => {
+  const handlePostReply = () => { // Creates a post in the DB and adds that post's id to both the original post's "replies" field, as well as the currently authenticated user's "posts" field
     if (replyText !== '') {
       createPost({
         variables: {

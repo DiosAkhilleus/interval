@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Input } from 'reactstrap';
-import { GET_CURRENT_USER, GET_USER_BY_ID, GET_USER_WITH_REGEX } from '../../graphql/queries';
+import { GET_CURRENT_USER, GET_USER_WITH_REGEX } from '../../graphql/queries';
 import { useQuery } from '@apollo/client';
 import { useAuth0 } from '@auth0/auth0-react';
 import UserSearchCard from './UserSearchCard';
@@ -8,18 +8,17 @@ import UserSearchCard from './UserSearchCard';
 interface Props {}
 
 const Discover = (props: Props) => {
-  // Placeholder discover component - will be modified in the future
 
-  const { user } = useAuth0();
-  const { email } = user!;
+  const { user } = useAuth0(); // Pulls current user from Auth0
+  const { email } = user!; // Retrieves email from currently authenticated user
 
-  const [userSearchValue, setUserSearchValue] = useState('');
+  const [userSearchValue, setUserSearchValue] = useState(''); // The current value of the text typed into the search bar
 
-  const userListFromRegex = useQuery(GET_USER_WITH_REGEX, {
+  const userListFromRegex = useQuery(GET_USER_WITH_REGEX, { // Retrieves users from DB with regex
     variables: { regex: userSearchValue },
   });
 
-  const currentUser = useQuery(GET_CURRENT_USER, {
+  const currentUser = useQuery(GET_CURRENT_USER, { // Retrieves the currently authenticated user form the DB
     variables: { email: email }
   }) 
 
@@ -30,12 +29,6 @@ const Discover = (props: Props) => {
     id: string;
     profile_image: string;
   }
-
-  useEffect(() => {
-    if (userListFromRegex.data) {
-      console.log(userListFromRegex.data.getUserByHandleRegex);
-    }
-  }, [userListFromRegex]);
   
   return (
     <div className="discover-container">

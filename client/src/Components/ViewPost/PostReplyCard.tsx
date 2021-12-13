@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_POST_BY_ID, GET_USER_BY_ID } from '../../graphql/queries';
+import { GET_POST_BY_ID } from '../../graphql/queries';
 import ReplyCreator from './ReplyCreator';
 import { Button } from 'react-bootstrap';
 
@@ -9,11 +8,12 @@ interface Props {
 }
 
 const PostReplyCard = (props: Props) => {
-  // console.log(props.replyID);
-  const postReply = useQuery(GET_POST_BY_ID, {
+
+  const postReply = useQuery(GET_POST_BY_ID, { // Retrieves a post by its db _id
     variables: { id: props.replyID },
-  }); // Retrieves a post by its db _id
-  // const replyPoster = useQuery(GET_USER_BY_ID, { variables: { id: postReply.data.}})
+  }); 
+
+
   return (
     <div
       style={{

@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 // GraphQL Apollo queries file
 
-
+// Retrieves all users from the DB
 export const GET_ALL_USERS = gql`
   query GetUsers {
     users {
@@ -13,6 +13,7 @@ export const GET_ALL_USERS = gql`
   }
 `;
 
+// Retrieves users by public_handle regex search... Used in the user search feature
 export const GET_USER_WITH_REGEX = gql`
   query GetUserByHandleRegex ($regex: String!) {
     getUserByHandleRegex(regex: $regex) {
@@ -25,6 +26,7 @@ export const GET_USER_WITH_REGEX = gql`
   }
 `
 
+// Retrieves the currently authenticated user by their email
 export const GET_CURRENT_USER = gql`
   query CurrentUser ($email: String!) {
     currentUser(email: $email) {
@@ -38,6 +40,7 @@ export const GET_CURRENT_USER = gql`
   }
 `;
 
+// Retrieves the posts that the currently authenticated user has either "liked" or "disliked"
 export const GET_CURRENT_USER_VOTED_POSTS = gql`
   query CurrentUser ($email: String!) {
     currentUser(email: $email) {
@@ -48,6 +51,7 @@ export const GET_CURRENT_USER_VOTED_POSTS = gql`
   }
 `;
 
+// Retrieves a user from the DB by ID
 export const GET_USER_BY_ID = gql`
   query GetUserById ($id: String!) {
     getUserById(_id: $id) {
@@ -58,6 +62,7 @@ export const GET_USER_BY_ID = gql`
   }
 `
 
+// Retrieves the users that the currently authenticated user is following
 export const GET_USER_FOLLOWING = gql`
   query GetUserById ($id: String!) {
     getUserById(_id: $id) {
@@ -66,6 +71,7 @@ export const GET_USER_FOLLOWING = gql`
   }
 `
 
+// Retrieves a user's profile information
 export const GET_USER_PROFILE = gql`
   query GetUserById ($id: String!) {
     getUserById(_id: $id) {
@@ -79,6 +85,7 @@ export const GET_USER_PROFILE = gql`
   }
 `
 
+// Retrieves all posts
 export const GET_POSTS = gql`
   query GetPosts {
     posts {
@@ -97,6 +104,7 @@ export const GET_POSTS = gql`
   }
 `
 
+// Retrieves a specific post by ID
 export const GET_POST_BY_ID = gql`
   query GetPostById ($id: String!) {
     getPostById (_id: $id) {
@@ -114,6 +122,7 @@ export const GET_POST_BY_ID = gql`
   }
 `
 
+// Retrieves a post's replies
 export const GET_POST_REPLIES = gql`
   query GetPostById($id: String!) {
     getPostById (_id: $id) {

@@ -10,17 +10,13 @@ interface Props {
 }
 
 const UserProfilePost = (props: Props) => {
-  const postData = useQuery(GET_POST_BY_ID, {
+  
+  // Retrieves post from DB with the post's ID
+  const postData = useQuery(GET_POST_BY_ID, { 
     variables: {
       id: props.postID,
     },
   });
-
-  useEffect(() => {
-    if (postData.data) {
-      console.log(postData.data);
-    }
-  }, [postData]);
 
   return (
     <div>

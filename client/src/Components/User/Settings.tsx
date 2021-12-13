@@ -14,17 +14,17 @@ import { Input } from 'reactstrap';
 interface Props {}
 
 const Settings = (props: Props) => {
-  const { user } = useAuth0();
-  const { email } = user!;
+  const { user } = useAuth0(); // Pulls user data from auth0
+  const { email } = user!; // Retrieves email from auth0 user info
 
   const [profileName, setProfileName] = useState(''); // User's profile name
-  const [newProfileName, setNewProfileName] = useState('');
-  const [profileImage, setProfileImage] = useState('');
-  const [newProfileImage, setNewProfileImage] = useState('');
+  const [newProfileName, setNewProfileName] = useState(''); // User's new profile name
+  const [profileImage, setProfileImage] = useState(''); // User's profile image
+  const [newProfileImage, setNewProfileImage] = useState(''); // User's new profile image
   const [publicHandle, setPublicHandle] = useState(''); // User's public handle
-  const [newPublicHandle, setNewPublicHandle] = useState('');
+  const [newPublicHandle, setNewPublicHandle] = useState(''); // User's new public handle
   const [editName, setEditName] = useState(false); // Is user's name being edited?
-  const [editProfileImage, setEditProfileImage] = useState(false);
+  const [editProfileImage, setEditProfileImage] = useState(false); // Is user's profile image being edited?
   const [editHandle, setEditHandle] = useState(false); // Is user's name being edited?
   const [userID, setUserID] = useState(''); // Current user's ID from the db
 
@@ -39,7 +39,7 @@ const Settings = (props: Props) => {
   //eslint-disable-next-line
   const [changeProfileImage, changeProfileImageData] = useMutation(CHANGE_PROFILE_IMAGE) //Modifies user profile img based on input
   
-  useEffect(() => {
+  useEffect(() => { // Sets state variables with data returned from DB
     if (currentUser.data) {
       setProfileName(currentUser.data.currentUser[0].name);
       setNewProfileName(currentUser.data.currentUser[0].name);
@@ -51,7 +51,7 @@ const Settings = (props: Props) => {
     }
   }, [currentUser]);
 
-  const handleConfirmName = () => {
+  const handleConfirmName = () => { // Handles confirmation of new profile name
     if (newProfileName.length <= 5) {
       alert('Your public name must be at least 5 characters');
     } else {
@@ -60,12 +60,12 @@ const Settings = (props: Props) => {
     }
   };
 
-  const handleCancelNameChange = () => {
+  const handleCancelNameChange = () => { // Handles name change cancelation
     setNewProfileName(profileName);
     setEditName(false);
   };
 
-  const handleConfirmHandle = () => {
+  const handleConfirmHandle = () => { // Handles confirmation of new public handle
     if (newPublicHandle.length <= 3) {
       alert('You must create a handle of at least 4 characters');
     } else {
@@ -76,17 +76,17 @@ const Settings = (props: Props) => {
     }
   };
 
-  const handleCancelHandleChange = () => {
+  const handleCancelHandleChange = () => { // Handles cancelation of public handle change
     setNewPublicHandle(publicHandle);
     setEditHandle(false);
   };
 
-  const handleCancelProfileImageChange = () => {
+  const handleCancelProfileImageChange = () => { // Handles cancelation of profile image link change
     setNewProfileImage(profileImage);
     setEditProfileImage(false);
   };
 
-  const handleConfirmProfileImage = () => {
+  const handleConfirmProfileImage = () => { // Handles confirmation of new profile image link
     if (newProfileImage === '') {
       alert('You must enter an image url');
     } else {

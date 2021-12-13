@@ -1,5 +1,5 @@
 import { useParams, useHistory } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   GET_POST_BY_ID,
   GET_USER_BY_ID,
@@ -19,13 +19,16 @@ const ViewPost = (props: Props) => {
   // Component for viewing a post
   const { postedBy, postId } =
     useParams<{ postedBy?: string; postId?: string }>(); // URL params with ids of the creator and the post.
-  const postFromId = useQuery(GET_POST_BY_ID, { variables: { id: postId } }); // Retrieves a post by its db _id
-  let history = useHistory();
 
-  const { user } = useAuth0();
-  const { email } = user!;
+  const postFromId = useQuery(GET_POST_BY_ID, { variables: { id: postId } }); // Retrieves a post by its db _id
+
+  let history = useHistory(); // Allows use of react-router history
+
+  const { user } = useAuth0(); // Pulls info for currently authenticated user from Auth0
+  const { email } = user!; // Retrieves email from Auth0 user object
 
   const currentUser = useQuery(GET_CURRENT_USER, {
+    // Retrieves the currently authenticated user
     variables: { email: email },
   });
 
@@ -35,6 +38,7 @@ const ViewPost = (props: Props) => {
   });
 
   const postReplies = useQuery(GET_POST_REPLIES, {
+    // Retrieves the replies from a specific post
     variables: { id: postId },
   });
 

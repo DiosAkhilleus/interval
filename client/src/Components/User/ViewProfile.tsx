@@ -5,6 +5,8 @@ import { GET_USER_PROFILE } from '../../graphql/queries';
 
 interface Props {}
 
+// This component will be for viewing another user's profile...
+
 const ViewProfile = (props: Props) => {
   const { userID } = useParams<{ userID?: string }>();
 

@@ -16,12 +16,15 @@ const GetUsers = (props: Props) => {
     profile_image: string;
   }
 
-  
   return (
     <div>
       {data.users.map((user: User, index: Number) => (
         <div>
-          <img src={user.profile_image} alt="" className="rounded-circle img-thumbnail" />
+          <img
+            src={user.profile_image}
+            alt=""
+            className="rounded-circle img-thumbnail"
+          />
           <h3>{user.name}</h3>
         </div>
       ))}

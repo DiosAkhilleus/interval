@@ -21,20 +21,21 @@ interface Props {
 }
 
 const UserSearchCard = (props: Props) => {
-  console.log(props.currentuserid);
 
-  const [isFollowed, setIsFollowed] = useState(false);
+  const [isFollowed, setIsFollowed] = useState(false); // Is the currently authenticated user following the user represented on this card?
 
-  const [completeUserFollowRequest, completeUserFollowRequestData] = useMutation(COMPLETE_USER_FOLLOW_REQUEST);
-  const [completeUserUnfollowRequest, completeUserUnfollowRequestData] = useMutation(COMPLETE_USER_UNFOLLOW_REQUEST);
+  //eslint-disable-next-line
+  const [completeUserFollowRequest, completeUserFollowRequestData] = useMutation(COMPLETE_USER_FOLLOW_REQUEST); // Completes a "follow" request for both the currently authenticated user and the target user
+  //eslint-disable-next-line
+  const [completeUserUnfollowRequest, completeUserUnfollowRequestData] = useMutation(COMPLETE_USER_UNFOLLOW_REQUEST); // Completes an "unfollow" request for both the currently authenticated user and the target user
 
-  const userFollowing = useQuery(GET_USER_FOLLOWING, {
+  const userFollowing = useQuery(GET_USER_FOLLOWING, { // Retrieves the full list of users the currently authenticated user is following
     variables: {
       id: props.currentuserid,
     },
   });
 
-  useEffect(() => {
+  useEffect(() => { // If the currently authenticated user is following the user represented by this card, set the "isFollowed" state value to be true
     if (userFollowing.data) {
       if (
         userFollowing.data.getUserById[0].following.indexOf(props.user.id) > -1
@@ -42,9 +43,10 @@ const UserSearchCard = (props: Props) => {
         setIsFollowed(true);
       }
     }
+    //eslint-disable-next-line
   }, [userFollowing]);
 
-  const handleToggleFollow = () => {
+  const handleToggleFollow = () => { // Handles a user follow or unfollow request depending on whether or not the currently authenticated user is already following the user represented by this card
     if (!isFollowed) {
       setIsFollowed(true);
       completeUserFollowRequest({

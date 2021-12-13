@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
 import { useMutation, useQuery } from '@apollo/client';
 import { Input } from 'reactstrap';
@@ -10,27 +10,28 @@ import Loading from './PublicComponents/Loading';
 interface Props {}
 
 const CreatePost = (props: Props) => {
-  // Placeholder create post component - will be updated in the future.
-  const { isAuthenticated } = useAuth0();
-  const { user } = useAuth0();
-  const { email } = user!;
+  const { isAuthenticated } = useAuth0(); // Checks if current user is authenticated
+  const { user } = useAuth0(); // Pulls currently authenticated user info from Auth0
+  const { email } = user!; // Retrieves email from Auth0 user object
 
-  const [postTitle, setPostTitle] = useState('');
-  const [postText, setPostText] = useState('');
-  const [tagArr, setTagArr] = useState<string[]>([]);
-  const [tagInputVal, setTagInputVal] = useState('');
+  const [postTitle, setPostTitle] = useState(''); // String representing the title of the post
+  const [postText, setPostText] = useState(''); // String representing the text of the post
+  const [tagArr, setTagArr] = useState<string[]>([]); // Array representing the post's added tags
+  const [tagInputVal, setTagInputVal] = useState(''); // String representing the currently typed text for the creation of a new tag
 
   const currentUser = useQuery(GET_CURRENT_USER, {
     // Retrieves current user data from the db based on currently authenticated user
     variables: { email: email },
   });
-  const [createPost, createPostData] = useMutation(CREATE_POST);
 
-  if (!isAuthenticated) {
+  // eslint-disable-next-line
+  const [createPost, createPostData] = useMutation(CREATE_POST); // Mutation for creating a post
+
+  if (!isAuthenticated) { // If user is not authenticated, returns "Please Log In"
     return <div>Please Log In</div>;
   }
 
-  const submitPost = () => {
+  const submitPost = () => { // Creates a new post in the DB with the values the user created
     if (postTitle !== '' && postText !== '') {
       createPost({
         variables: {
@@ -61,14 +62,18 @@ const CreatePost = (props: Props) => {
     }
   };
 
-  const handleAddTag = () => {
-    let newTagArr = tagArr;
-    newTagArr.push(tagInputVal);
-    setTagArr(newTagArr);
-    setTagInputVal('');
+  const handleAddTag = () => { // Handles the creation of a new tag based on the user's input string in the tag creation input
+    if (tagInputVal !== '') {
+      let newTagArr = tagArr;
+      newTagArr.push(tagInputVal);
+      setTagArr(newTagArr);
+      setTagInputVal('');
+    } else {
+      alert('You cannot have an empty tag')
+    }
   };
 
-  const handleRemoveTag = (ind: number) => {
+  const handleRemoveTag = (ind: number) => { // Handles the removal of a tag when the user clicks the "remove" icon
     let newTagArr = tagArr.filter((el, index) => index !== ind);
     setTagArr(newTagArr);
   };

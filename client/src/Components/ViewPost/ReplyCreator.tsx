@@ -13,7 +13,7 @@ interface Props {
 
 const ReplyCreator = (props: Props) => {
 
-  const replyCreator = useQuery(GET_USER_BY_ID, {
+  const replyCreator = useQuery(GET_USER_BY_ID, { // Retrieves a user by ID from the DB
     variables: { id: props.replyInfo.posted_by },
   });
 
