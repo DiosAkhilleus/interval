@@ -8,10 +8,10 @@ export const typeDefs = gql`
     cheese: String!
     users: [User!]!
     currentUser(email: String!): [User!]!
-    getUserById(_id: String!): [User!]!
+    getUserByID(_id: String!): [User!]!
     getUserByHandleRegex(regex: String!): [User!]!
     posts: [PostWithEntities!]!
-    getPostById(_id: String!): [Post!]!
+    getPostByID(_id: String!): [Post!]!
   }
 
   type User {
