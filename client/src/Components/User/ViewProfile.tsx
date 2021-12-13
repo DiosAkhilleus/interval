@@ -1,9 +1,8 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_USER_PROFILE } from '../../graphql/queries';
 import { withAuthenticationRequired } from '@auth0/auth0-react';
-import Loading from '../PublicComponents/Loading';
+import Loading from '../PublicComponents/Loading'
 
 interface Props {}
 
@@ -17,7 +16,8 @@ const ViewProfile = (props: Props) => {
     variables: { id: userID },
   });
 
-  return <div>{userInfo.data ? userInfo.data.getUserById[0].name : ''}</div>;
+
+  return <div>{userInfo.data ? userInfo.data.getUserByID[0].name : ''}</div>;
 };
 
 
