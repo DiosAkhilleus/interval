@@ -107,6 +107,20 @@ export const resolvers = {
       );
       return updatedUser;
     },
+    addPostIDToUserPosts: async (_, { user_id, post_id }) => {
+      const user = await User.find({ _id: user_id });
+      let newPostList = [post_id, ...user[0].posts];
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: user_id },
+        {
+          posts: newPostList,
+        },
+        {
+          new: true,
+        }
+      );
+      return updatedUser;
+    },
     changeName: async (_, { _id, name }) => {
       const filter = { _id: _id };
       const update = { name: name };
