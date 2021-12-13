@@ -3,7 +3,7 @@ import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
 import { useMutation, useQuery } from '@apollo/client';
 import { Input } from 'reactstrap';
 import { Button } from 'react-bootstrap';
-import { CREATE_POST } from '../graphql/mutations';
+import { ADD_POST_ID_TO_USER_POSTS, CREATE_POST } from '../graphql/mutations';
 import { GET_CURRENT_USER } from '../graphql/queries';
 import Loading from './PublicComponents/Loading';
 
@@ -26,12 +26,18 @@ const CreatePost = (props: Props) => {
 
   // eslint-disable-next-line
   const [createPost, createPostData] = useMutation(CREATE_POST); // Mutation for creating a post
+  //eslint-disable-next-line
+  const [addPostIDToUserPosts, addPostIDToUserPostsData] = useMutation(
+    ADD_POST_ID_TO_USER_POSTS
+  ); // Mutation for adding a new post to currently authenticated user's "post" field
 
-  if (!isAuthenticated) { // If user is not authenticated, returns "Please Log In"
+  if (!isAuthenticated) {
+    // If user is not authenticated, returns "Please Log In"
     return <div>Please Log In</div>;
   }
 
-  const submitPost = () => { // Creates a new post in the DB with the values the user created
+  const submitPost = () => {
+    // Creates a new post in the DB with the values the user created
     if (postTitle !== '' && postText !== '') {
       createPost({
         variables: {
@@ -53,27 +59,36 @@ const CreatePost = (props: Props) => {
           urls: [],
         },
       }).then((results) => {
-        if (results.data.createPost.title === postTitle) {
-          window.location.reload();
-        }
+        addPostIDToUserPosts({
+          variables: {
+            user_id: currentUser.data.currentUser[0].id,
+            post_id: results.data.createPost.id,
+          },
+        }).then((res) => {
+          if (res.data.addPostIDToUserPosts.id) {
+            window.location.reload();
+          }
+        });
       });
     } else {
-      alert ("Your post must have a title and text!");
+      alert('Your post must have a title and text!');
     }
   };
 
-  const handleAddTag = () => { // Handles the creation of a new tag based on the user's input string in the tag creation input
+  const handleAddTag = () => {
+    // Handles the creation of a new tag based on the user's input string in the tag creation input
     if (tagInputVal !== '') {
       let newTagArr = tagArr;
       newTagArr.push(tagInputVal);
       setTagArr(newTagArr);
       setTagInputVal('');
     } else {
-      alert('You cannot have an empty tag')
+      alert('You cannot have an empty tag');
     }
   };
 
-  const handleRemoveTag = (ind: number) => { // Handles the removal of a tag when the user clicks the "remove" icon
+  const handleRemoveTag = (ind: number) => {
+    // Handles the removal of a tag when the user clicks the "remove" icon
     let newTagArr = tagArr.filter((el, index) => index !== ind);
     setTagArr(newTagArr);
   };
