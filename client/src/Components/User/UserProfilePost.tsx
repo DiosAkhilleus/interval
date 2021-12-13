@@ -1,8 +1,6 @@
-import { useState, useEffect } from 'react';
 import { GET_POST_BY_ID } from '../../graphql/queries';
 import { useQuery } from '@apollo/client';
 import { withAuthenticationRequired } from '@auth0/auth0-react';
-import Post from '../HomePage/Post';
 import Loading from '../PublicComponents/Loading';
 import { Link } from 'react-router-dom';
 
