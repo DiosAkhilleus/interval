@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_USER_PROFILE } from '../../graphql/queries';
+import { withAuthenticationRequired } from '@auth0/auth0-react';
+import Loading from '../PublicComponents/Loading';
 
 interface Props {}
 
@@ -18,4 +20,8 @@ const ViewProfile = (props: Props) => {
   return <div>{userInfo.data ? userInfo.data.getUserById[0].name : ''}</div>;
 };
 
-export default ViewProfile;
+
+export default withAuthenticationRequired(ViewProfile, {
+  onRedirecting: () => <Loading />,
+});
+

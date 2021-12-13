@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Input } from 'reactstrap';
 import { GET_CURRENT_USER, GET_USER_WITH_REGEX } from '../../graphql/queries';
 import { useQuery } from '@apollo/client';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
+import Loading from '../PublicComponents/Loading';
 import UserSearchCard from './UserSearchCard';
 
 interface Props {}
@@ -57,4 +58,6 @@ const Discover = (props: Props) => {
   );
 };
 
-export default Discover;
+export default withAuthenticationRequired(Discover, {
+  onRedirecting: () => <Loading />,
+});
