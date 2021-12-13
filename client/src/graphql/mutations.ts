@@ -129,6 +129,15 @@ export const ADD_REPLY_ID_TO_USER_POSTS = gql`
   }
 `
 
+// Adds a post's ID to a user's "posts" field in the DB
+export const ADD_POST_ID_TO_USER_POSTS = gql`
+  mutation AddPostIDToUserPosts($user_id: String!, $post_id: String!) {
+    addPostIDToUserPosts(user_id: $user_id, post_id: $post_id) {
+      id
+    }
+  }
+`
+ 
 // Creates a new post in the DB
 export const CREATE_POST = gql`
   mutation CreatePost(
@@ -167,7 +176,7 @@ export const CREATE_POST = gql`
       tags: $tags
       urls: $urls
     ) {
-      text
+      title
       id
     }
   }
