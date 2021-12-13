@@ -17,11 +17,11 @@ const NavBar = (props: Props) => {
             <Nav.Link href="/createpost">Create Post</Nav.Link>
             <NavDropdown style={{userSelect: 'none'}} title="Other" id="basic-nav-dropdown">
               <NavDropdown.Item href="/users/search">Find Users</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+              {/* <NavDropdown.Item href="#action/3.2">
                 Another action
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
+              <NavDropdown.Divider /> */}
               <NavDropdown.Item href="/settings">
                 Your Settings
               </NavDropdown.Item>
