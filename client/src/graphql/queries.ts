@@ -36,6 +36,7 @@ export const GET_CURRENT_USER = gql`
       public_handle
       id
       posts
+      following
     }
   }
 `;
@@ -53,8 +54,8 @@ export const GET_CURRENT_USER_VOTED_POSTS = gql`
 
 // Retrieves a user from the DB by ID
 export const GET_USER_BY_ID = gql`
-  query GetUserById ($id: String!) {
-    getUserById(_id: $id) {
+  query GetUserByID ($id: String!) {
+    getUserByID(_id: $id) {
       name
       public_handle
       profile_image
@@ -64,8 +65,8 @@ export const GET_USER_BY_ID = gql`
 
 // Retrieves the users that the currently authenticated user is following
 export const GET_USER_FOLLOWING = gql`
-  query GetUserById ($id: String!) {
-    getUserById(_id: $id) {
+  query GetUserByID ($id: String!) {
+    getUserByID(_id: $id) {
       following
     }
   }
@@ -73,8 +74,8 @@ export const GET_USER_FOLLOWING = gql`
 
 // Retrieves a user's profile information
 export const GET_USER_PROFILE = gql`
-  query GetUserById ($id: String!) {
-    getUserById(_id: $id) {
+  query GetUserByID ($id: String!) {
+    getUserByID(_id: $id) {
       name
       public_handle
       profile_image
@@ -106,8 +107,8 @@ export const GET_POSTS = gql`
 
 // Retrieves a specific post by ID
 export const GET_POST_BY_ID = gql`
-  query GetPostById ($id: String!) {
-    getPostById (_id: $id) {
+  query GetPostByID ($id: String!) {
+    getPostByID (_id: $id) {
       text
       title
       posted_by
@@ -124,8 +125,8 @@ export const GET_POST_BY_ID = gql`
 
 // Retrieves a post's replies
 export const GET_POST_REPLIES = gql`
-  query GetPostById($id: String!) {
-    getPostById (_id: $id) {
+  query GetPostByID($id: String!) {
+    getPostByID (_id: $id) {
       replies
     }
   }
