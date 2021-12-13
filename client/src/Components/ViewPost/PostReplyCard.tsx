@@ -37,12 +37,12 @@ const PostReplyCard = (props: Props) => {
       />
       <div className="post-page-reply">
         {postReply.data ? (
-          <ReplyCreator replyInfo={postReply.data.getPostById[0]} />
+          <ReplyCreator replyInfo={postReply.data.getPostByID[0]} />
         ) : (
           ''
         )}
         <div style={{ margin: 10, fontSize: 18 }}>
-          {postReply.data ? postReply.data.getPostById[0].text : ''}
+          {postReply.data ? postReply.data.getPostByID[0].text : ''}
         </div>
         <div
           style={{
@@ -54,7 +54,7 @@ const PostReplyCard = (props: Props) => {
           {postReply.data ? (
             <Button
               style={{ marginRight: 10 }}
-              href={`/post/${postReply.data.getPostById[0].posted_by}/${props.replyID}`}
+              href={`/post/${postReply.data.getPostByID[0].posted_by}/${props.replyID}`}
               variant="outline-primary"
             >
               Reply to this comment

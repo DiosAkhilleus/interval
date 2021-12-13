@@ -64,7 +64,7 @@ const Post = ({
   useEffect(() => {
     // Sets all the state variables depending on the information retrieved from the db
     if (data) {
-      setImage(data.getUserById[0].profile_image);
+      setImage(data.getUserByID[0].profile_image);
       const filteredUserLikes = currentUserLikedPosts.filter(
         (el: string) => el === postInfo.id
       );
@@ -198,9 +198,9 @@ const Post = ({
           <div className="post-creator-handle">
             {data ? (
               <div>
-                <strong>{data.getUserById[0].name}</strong>
+                <strong>{data.getUserByID[0].name}</strong>
                 <Link style={{color: 'darkcyan'}} to={`/users/${postInfo.posted_by}`}>
-                  <div>@{data.getUserById[0].public_handle}</div>
+                  <div>@{data.getUserByID[0].public_handle}</div>
                 </Link>
               </div>
             ) : (

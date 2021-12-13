@@ -38,7 +38,7 @@ const UserSearchCard = (props: Props) => {
   useEffect(() => { // If the currently authenticated user is following the user represented by this card, set the "isFollowed" state value to be true
     if (userFollowing.data) {
       if (
-        userFollowing.data.getUserById[0].following.indexOf(props.user.id) > -1
+        userFollowing.data.getUserByID[0].following.indexOf(props.user.id) > -1
       ) {
         setIsFollowed(true);
       }

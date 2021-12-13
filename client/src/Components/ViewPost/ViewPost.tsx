@@ -65,16 +65,16 @@ const ViewPost = (props: Props) => {
             />
           </div>
           <div className="post-page-title">
-            {postFromId.data ? postFromId.data.getPostById[0].title : ''}
+            {postFromId.data ? postFromId.data.getPostByID[0].title : ''}
           </div>
           <div className="post-page-creator">
-            {postCreator.data ? postCreator.data.getUserById[0].name : ''}
+            {postCreator.data ? postCreator.data.getUserByID[0].name : ''}
           </div>
         </div>
         <div className="post-page-main-content">
           {postFromId.data ? (
             <h3 style={{ margin: 10 }}>
-              {postFromId.data.getPostById[0].text}
+              {postFromId.data.getPostByID[0].text}
             </h3>
           ) : (
             ''
@@ -104,7 +104,7 @@ const ViewPost = (props: Props) => {
             ''
           )}
           {postReplies.data
-            ? postReplies.data.getPostById[0].replies.map(
+            ? postReplies.data.getPostByID[0].replies.map(
                 (post: string, index: number) => (
                   <PostReplyCard replyID={post} key={index} />
                 )

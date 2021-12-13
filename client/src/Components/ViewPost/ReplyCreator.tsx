@@ -19,7 +19,7 @@ const ReplyCreator = (props: Props) => {
 
   return (
     <div style={{borderBottom: '2px solid rgb(8, 42, 52)', display: 'flex', justifyContent: 'space-between'}}>
-      <strong style={{fontSize: 24, marginLeft: 10}}>@{replyCreator.data ? replyCreator.data.getUserById[0].public_handle : ''}</strong>
+      <strong style={{fontSize: 24, marginLeft: 10}}>@{replyCreator.data ? replyCreator.data.getUserByID[0].public_handle : ''}</strong>
       <div style={{fontSize: 20, verticalAlign: 'middle', marginRight: 10, marginTop: 2}}>{props.replyInfo.replies.length ? props.replyInfo.replies.length === 1 ? `${props.replyInfo.replies.length} reply` : `${props.replyInfo.replies.length} replies` : '0 replies'}</div>
     </div>
   );
