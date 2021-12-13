@@ -1,7 +1,6 @@
 import Loading from '../PublicComponents/Loading';
 import Post from './Post';
 import PleaseLogIn from '../PublicComponents/PleaseLogIn';
-import FriendActivityCard from './FriendActivityCard';
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
 import { useQuery } from '@apollo/client';
 import { GET_POSTS, GET_CURRENT_USER_VOTED_POSTS } from '../../graphql/queries';
@@ -11,7 +10,7 @@ const Home = (props: Props) => { // Home component – includes both discover an
 
   const { isLoading, isAuthenticated, user } = useAuth0(); // Auth0 variables
 
-  const { loading, error, data } = useQuery(GET_POSTS); // Retrieves all posts – Need to edit in the future to only return original posts, not replies
+  const { data } = useQuery(GET_POSTS); // Retrieves all posts – Need to edit in the future to only return original posts, not replies
 
   let userVotedPosts = useQuery(GET_CURRENT_USER_VOTED_POSTS, { // Retrieves the posts the currently authenticated user has upvoted or downvoted
     variables: {email: user!.email}
