@@ -45,15 +45,17 @@ const Post = ({
   const [postLikes, setPostLikes] = useState(postInfo.likes); // How many likes does the current post have
   const [postDislikes, setPostDislikes] = useState(postInfo.dislikes); // How many dislikes does the current post have
 
-  const { loading, error, data } = useQuery(GET_USER_BY_ID, {
+  const { data } = useQuery(GET_USER_BY_ID, {
     // Retrieves the user who created the current post
     variables: { id: postInfo.posted_by },
   });
 
+  // eslint-disable-next-line
   const [modifyPostWithVote, modifyPostWithVoteData] = useMutation(
     // Updates the post when the current user votes
     MODIFY_POST_WITH_VOTE
   );
+  // eslint-disable-next-line
   const [modifyUserVoteFields, modifyUserVoteFieldsData] = useMutation(
     // Updates the current user's db fields regarding voting
     MODIFY_USER_VOTE_FIELDS
@@ -63,8 +65,6 @@ const Post = ({
     // Sets all the state variables depending on the information retrieved from the db
     if (data) {
       setImage(data.getUserById[0].profile_image);
-      console.log(currentUserLikedPosts, currentUserDislikedPosts);
-      console.log(postInfo.id);
       const filteredUserLikes = currentUserLikedPosts.filter(
         (el: string) => el === postInfo.id
       );
@@ -77,7 +77,8 @@ const Post = ({
       if (filteredUserDislikes.length > 0) {
         setDislikedByUser(true);
       }
-    }
+    } 
+    // eslint-disable-next-line
   }, [data]);
 
   const handleVote = (vote: string) => {
@@ -231,7 +232,7 @@ const Post = ({
 
         <div className="post-content-tags">
           {postInfo.entities.tags.map((el: string, id: number) => (
-            <div style={{ marginLeft: 10 }}>{el}</div>
+            <div style={{ marginLeft: 10 }} key={id}>#{el}</div>
           ))}
           <div style={{ width: '100%', textAlign: 'right', marginRight: 10 }}>
             {postInfo.replies
