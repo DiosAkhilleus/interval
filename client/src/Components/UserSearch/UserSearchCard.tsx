@@ -78,7 +78,7 @@ const UserSearchCard = (props: Props) => {
         }}
       >
         <img
-          style={{ marginLeft: 10, height: '90%' }}
+          style={{ marginLeft: 10, height: 72, width: 72 }}
           className="rounded-circle img-thumbnail"
           src={props.user.profile_image}
           alt="Profile"
