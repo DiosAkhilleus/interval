@@ -46,15 +46,15 @@ const UserProfilePost = (props: Props) => {
               variant="primary"
               style={{width: 160}}
             >
-              See Original Post
+              View Reply
             </Button>
           </div>
         ) : (
           <div className="user-profile-info-card-content">
             <div style={{ marginLeft: 10, paddingBottom: 5}}>
-              {postData.data.getPostByID[0].text.length > 24
-                ? `${postData.data.getPostByID[0].text.substring(0, 24)}...`
-                : `${postData.data.getPostByID[0].text}`}
+              {postData.data.getPostByID[0].title.length > 24
+                ? `${postData.data.getPostByID[0].title.substring(0, 24)}...`
+                : `${postData.data.getPostByID[0].title}`}
             </div>
 
             <Button
@@ -62,7 +62,7 @@ const UserProfilePost = (props: Props) => {
               variant="primary"
               style={{width: 160}}
             >
-              See Your Post
+              View Post
             </Button>
           </div>
         )

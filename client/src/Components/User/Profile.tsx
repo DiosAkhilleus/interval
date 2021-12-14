@@ -68,12 +68,13 @@ const Profile = (props: Props) => {
                 width: '95%',
                 minHeight: 48,
                 fontSize: 24,
-                borderBottom: '2px solid rgb(8, 42, 52)'
+                borderBottom: '2px solid rgb(8, 42, 52)',
               }}
               className="sticky-top"
             >
               Your Posts
             </h4>
+            <div className="mobile-spacer"></div>
             {currentUser.data &&
             currentUser.data.currentUser[0].posts.length > 0
               ? currentUser.data.currentUser[0].posts.map(
@@ -86,9 +87,10 @@ const Profile = (props: Props) => {
                   )
                 )
               : ''}
+            <div style={{ minHeight: 20, minWidth: '100%' }}></div>
           </div>
           <div className="user-profile-content">
-          <h4
+            <h4
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -98,12 +100,13 @@ const Profile = (props: Props) => {
                 width: '95%',
                 minHeight: 48,
                 fontSize: 24,
-                borderBottom: '2px solid rgb(8, 42, 52)'
+                borderBottom: '2px solid rgb(8, 42, 52)',
               }}
               className="sticky-top"
             >
               Users You Follow
             </h4>
+          <div className="mobile-spacer"></div>
             {currentUser.data
               ? currentUser.data.currentUser[0].following.map(
                   (userID: string, index: string) => (
