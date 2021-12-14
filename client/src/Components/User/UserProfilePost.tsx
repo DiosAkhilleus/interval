@@ -22,7 +22,7 @@ const UserProfilePost = (props: Props) => {
       {postData.data ? (
         postData.data.getPostByID[0].reply === true ? (
           <div className="user-profile-info-card-content">
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingBottom: 5}}>
               <img
                 style={{
                   width: 30,
@@ -51,7 +51,7 @@ const UserProfilePost = (props: Props) => {
           </div>
         ) : (
           <div className="user-profile-info-card-content">
-            <div style={{ marginLeft: 10}}>
+            <div style={{ marginLeft: 10, paddingBottom: 5}}>
               {postData.data.getPostByID[0].text.length > 24
                 ? `${postData.data.getPostByID[0].text.substring(0, 24)}...`
                 : `${postData.data.getPostByID[0].text}`}
