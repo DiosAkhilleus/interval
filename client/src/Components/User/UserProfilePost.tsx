@@ -34,7 +34,7 @@ const UserProfilePost = (props: Props) => {
                 src="https://img.icons8.com/material/48/000000/reply-arrow--v1.png"
                 alt="reply-arrow"
               />
-              <div style={{ fontSize: 20 }}>
+              <div>
                 {postData.data.getPostByID[0].text.length > 20
                   ? `${postData.data.getPostByID[0].text.substring(0, 20)}...`
                   : `${postData.data.getPostByID[0].text}`}
@@ -51,7 +51,7 @@ const UserProfilePost = (props: Props) => {
           </div>
         ) : (
           <div className="user-profile-info-card-content">
-            <div style={{ fontSize: 25, marginLeft: 10}}>
+            <div style={{ marginLeft: 10}}>
               {postData.data.getPostByID[0].text.length > 24
                 ? `${postData.data.getPostByID[0].text.substring(0, 24)}...`
                 : `${postData.data.getPostByID[0].text}`}
