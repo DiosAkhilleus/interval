@@ -52,7 +52,7 @@ const PostReplyModal = (props: Props) => {
               original_post_id: props.originalpostid, 
               reply_id: results.data.createPost.id,
             }
-          })
+          });
           addReplyIDToUserPosts({
             variables: {
               user_id: props.currentuserid,
