@@ -52,8 +52,8 @@ const UserProfilePost = (props: Props) => {
         ) : (
           <div className="user-profile-info-card-content">
             <div style={{ fontSize: 25, marginLeft: 10}}>
-              {postData.data.getPostByID[0].text.length > 30
-                ? `${postData.data.getPostByID[0].text.substring(0, 30)}...`
+              {postData.data.getPostByID[0].text.length > 24
+                ? `${postData.data.getPostByID[0].text.substring(0, 24)}...`
                 : `${postData.data.getPostByID[0].text}`}
             </div>
 

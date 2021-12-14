@@ -209,7 +209,7 @@ const Post = ({
           </div>
           {!isLoading ? (
             <img
-              style={{ height: '95%', margin: 4 }}
+              style={{ height: 88, width: 88, margin: 6 }}
               src={image}
               alt="Profile"
               className="rounded-circle img-thumbnail"

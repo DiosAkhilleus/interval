@@ -24,7 +24,7 @@ const UserProfileFollowing = (props: Props) => {
         >
           {userInfo.data ? (
             <img
-              style={{ marginLeft: 10, height: 60 }}
+              style={{ marginLeft: 10, height: 60, width: 60 }}
               className="rounded-circle img-thumbnail"
               src={userInfo.data.getUserByID[0].profile_image}
               alt="Profile"
