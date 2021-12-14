@@ -59,7 +59,17 @@ const Profile = (props: Props) => {
         <div className="user-profile-content-container">
           <div className="user-profile-content">
             <h4
-              style={{ marginTop: 10, marginBottom: 0 }}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'rgb(248, 249, 250)',
+                width: '95%',
+                minHeight: 48,
+                fontSize: 24,
+                borderBottom: '2px solid rgb(8, 42, 52)'
+              }}
               className="sticky-top"
             >
               Your Posts
@@ -78,17 +88,29 @@ const Profile = (props: Props) => {
               : ''}
           </div>
           <div className="user-profile-content">
-            <h4
-              style={{ marginTop: 10, marginBottom: 0 }}
+          <h4
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'rgb(248, 249, 250)',
+                width: '95%',
+                minHeight: 48,
+                fontSize: 24,
+                borderBottom: '2px solid rgb(8, 42, 52)'
+              }}
               className="sticky-top"
             >
               Users You Follow
             </h4>
-            {currentUser.data ? currentUser.data.currentUser[0].following.map(
-              (userID: string, index: string) => (
-                <UserProfileFollowing userID={userID} key={index} />
-              )
-            ) : ''}
+            {currentUser.data
+              ? currentUser.data.currentUser[0].following.map(
+                  (userID: string, index: string) => (
+                    <UserProfileFollowing userID={userID} key={index} />
+                  )
+                )
+              : ''}
           </div>
         </div>
       </div>
