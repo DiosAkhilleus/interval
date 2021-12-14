@@ -33,7 +33,7 @@ const PostReplyModal = (props: Props) => {
           repost_count: 0,
           reposted: false,
           reply: true,
-          title: 'Reply',
+          title: '',
           text: replyText,
           in_reply_to_public_handle: '',
           in_reply_to_user_id: props.originalposterid,
