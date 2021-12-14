@@ -6,6 +6,7 @@ import {
   COMPLETE_USER_UNFOLLOW_REQUEST,
 } from '../../graphql/mutations';
 import { GET_USER_FOLLOWING } from '../../graphql/queries';
+import { Link } from 'react-router-dom';
 
 interface User {
   name: string;
@@ -85,7 +86,9 @@ const UserSearchCard = (props: Props) => {
         />
         <div style={{ margin: 10 }}>
           <h3 style={{ marginBottom: 0 }}>{props.user.name}</h3>
-          <div>@{props.user.public_handle}</div>
+          <Link to={`/users/${props.user.id}`} style={{color: 'darkcyan'}}>
+            <div>@{props.user.public_handle}</div>
+          </Link>
         </div>
       </div>
       {!isFollowed ? (
