@@ -457,6 +457,7 @@
     flex-direction: row;
     align-items: center;
     border-radius: 4px;
+    font-size: 25px;
   }
 
   .user-profile-info-card-content {
@@ -465,7 +466,7 @@
     align-items: center;
     justify-content: space-between;
     width: 95%;
-    font-size: 25, 
+    font-size: 25px, 
   }
 
   @media only screen and (max-width: 1000px) {
