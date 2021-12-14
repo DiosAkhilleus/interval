@@ -178,6 +178,7 @@ export const CREATE_POST = gql`
     ) {
       title
       id
+      text
     }
   }
 `;
