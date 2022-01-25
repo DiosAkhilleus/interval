@@ -27,7 +27,6 @@ const Profile = (props: Props) => {
     if (currentUser.data) {
       setProfileName(currentUser.data.currentUser[0].name);
       setUserID(currentUser.data.currentUser[0].id);
-      console.log(currentUser.data.currentUser[0].posts);
     }
   }, [currentUser]);
 

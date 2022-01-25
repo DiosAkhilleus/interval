@@ -38,7 +38,7 @@ const PostSchema = new mongoose.Schema({ // Schema for Post database entry
   },
   title: {
     type: String, 
-    required: true,
+    required: false,
   },
   text: {
     type: String,

@@ -146,7 +146,7 @@ export const CREATE_POST = gql`
     $repost_count: Int!
     $reposted: Boolean!
     $reply: Boolean!
-    $title: String!
+    $title: String
     $text: String!
     $in_reply_to_public_handle: String!
     $in_reply_to_user_id: String!
